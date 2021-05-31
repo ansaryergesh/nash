@@ -5,11 +5,34 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "4.0.0",
+    "disable-scroll": "^0.6.0",
+    "font-awesome": "^4.7.0",
+    "formik": "^2.2.6",
+    "jquery": "^3.6.0",
+    "js-cookie": "^2.2.1",
     "next": "10.2.0",
+    "next-redux-wrapper": "^6.0.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-awesome-modal": "^2.0.5",
+    "react-burger-menu": "^3.0.6",
+    "react-dom": "17.0.2",
+    "react-dropzone": "^11.3.2",
+    "react-input-mask": "^2.0.4",
+    "react-number-format": "^4.6.0",
+    "react-slick": "^0.28.1",
+    "react-toast-notifications": "^2.4.4",
+    "react-transition-group": "^2.9.0",
+    "reactstrap": "^8.9.0",
+    "sass": "^1.32.8",
+    "scroll-js": "^3.4.1",
+    "scroll-to-element": "^2.0.3",
+    "slick-carousel": "^1.8.1",
+    "sweetalert": "^2.1.2"
   }
 }

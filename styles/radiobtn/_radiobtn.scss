@@ -1,0 +1,96 @@
+.radio_groups {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-around;
+
+    .radiolabel {
+      font-size: 18px;
+    }
+}
+
+.check_groups {
+  display: flex;
+  // align-items: center;
+  justify-content: space-around;
+  // flex-wrap: wrap;
+  margin:75px 0!important;
+  flex-direction: column;
+  width: 150%;
+  @media(max-width: 768px) {
+    width: 100%;
+  }
+  .checklabel {
+    font-size: 14px;
+    &::before {
+
+      margin-right: 40px!important;
+    }
+  }
+
+  .check-group {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+    width: 48%;
+    @media(max-width: 768px) {
+      width: 100%;
+    }
+    // flex:2;
+    // padding: 100px 25px;
+  }
+}
+
+.check-group {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.check-group input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+
+.check-group label {
+  position: relative;
+  cursor: pointer;
+}
+
+.check-group label:before {
+  content:'';
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 6px solid #DBDBDB;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
+.check-group input:checked + label:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -20px;
+  left: 9px;
+  width: 20px;
+  height: 40px;
+  border: solid #155BFF;
+  border-width: 0 8px 8px 0;
+  transform: rotate(40deg);
+  transition: all .3s;
+}
+
+.thirdstep {
+  padding: 20px 20px!important;
+}

@@ -1,0 +1,129 @@
+.about {
+  .whyus-block {
+  
+    .whyus_top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 50px;
+      h2 {
+        font-size: calc(48px + (80 - 48) * ((100vw - 768px) / (1600 - 768)));
+        line-height: 60px;
+      }
+      p {
+        max-width: 30%;
+      }
+    }
+  }
+
+  .advantage_block {
+    margin-top: 55px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .advantage--item:nth-child(3) {
+      p {
+        transform: translateY(3%);
+      }
+
+      .advantage--img {
+        img {
+          top: 50%;
+          left:50%;
+          transform: rotate(-45deg) translate(40%, -40%);
+          -ms-transform: rotate(-45deg) translate(40%, -40%); /* IE 9 */
+          -webkit-transform: rotate(-45deg) translate(40%, -40%);
+        }
+      }
+    }
+    .advantage--img {
+      width:164px;
+      height:164px;
+      overflow:hidden;
+      transform: rotate(45deg);
+      -ms-transform: rotate(45deg); /* IE 9 */
+      -webkit-transform: rotate(45deg); /* Safari and Chrome */
+      position:relative;
+      border: 10px solid;
+      border-image-slice: 1;
+      border-width: 1px;
+      border-image-source: linear-gradient(to left, #67CFF7, #FFF600);
+      margin-bottom: 100px;
+      img {
+        position: absolute;
+        top:92px;
+        left: 92px;
+        transform: rotate(-45deg) translate(15%, -60%);
+        -ms-transform: rotate(-45deg) translate(15%, -60%); /* IE 9 */
+        -webkit-transform: rotate(-45deg) translate(15%, -60%); /* Safari and */
+        
+        // margin-left: calc(50% + );
+        // top:-81.5px;
+      }
+    }
+  }
+}
+
+.practice {
+  margin-top: 220px;
+
+  h1 {  
+    font-size: calc(55px + (80 - 55) * ((100vw - 768px) / (1600 - 768)));
+    line-height: calc(38px + (60 - 38) * ((100vw - 768px) / (1600 - 768)));
+    font-weight: bold;
+    
+  }
+
+  &--top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .practice_item {
+    position: relative;
+    p {
+      margin-top: 40px;
+      text-align: center;
+    }
+    img {
+      position: absolute;
+      top:-40%;
+      z-index: -1;
+    }
+  }
+  &--text {
+    margin-top: 50px;
+    text-align: center;
+    padding: 20px 25px;
+  }
+  &--bigtext {
+    margin-top: 50px;
+    padding: 20px 55px;
+  }
+
+  &--banner {
+    margin-top: 80px;
+    background-color: #CADAF7;
+    position: relative;
+    // background-image: url('/img/sot.png');
+    // background-repeat: no-repeat;
+    // // background-size: c;
+    // background-position: top 50% left 105%;
+
+    padding:90px;
+    h2 {
+      font-size: calc(55px + (80 - 55) * ((100vw - 768px) / (1600 - 768)));
+      line-height: calc(38px + (60 - 38) * ((100vw - 768px) / (1600 - 768)));
+      font-weight: bold;
+    }
+    p {
+      margin-top: 62px;
+      width: 40%;
+    }
+
+    img {
+      position: absolute;
+      top:10%;
+      right: -5%;
+    }
+  }
+}
