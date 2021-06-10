@@ -2,6 +2,10 @@
 body.modal {
 }
 
+body.modalka_block {
+    overflow: hidden;
+}
+
 .modalka_block {
     position: fixed;
     top: 0px;
@@ -12,12 +16,12 @@ body.modal {
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    background-color: rgba(174, 171, 171, 0.109);
-    overflow-x:hidden;
+    background-color: rgba(174, 171, 171, 0.823);
+    overflow:hidden;
 }
 .modalka_code {
     // top: -45%!important;
-    background-color: rgba(204, 204, 204, 0.245)!important;
+    background-color: rgba(204, 204, 204, 0.544)!important;
     // position: absolute!important;
     // top: 0!important;
     // left: 0!important;
@@ -43,6 +47,10 @@ body.modal {
 .modalka_content {
     padding:40px 40px 20px 40px;
     position: relative;
+    input[type=button] {
+        margin: auto!important;
+        text-align: center!important;
+    }
     .danger {
         color:red;
         margin: 0!important;
@@ -63,19 +71,28 @@ body.modal {
             position: absolute;
             z-index: -10;
         }
+        img {
+            width: 70px;
+        }
+    }
+    .code_button {
+        padding-bottom: 0px!important; 
     }
     .button {
-        padding-top: 27px;
-        padding-bottom: 27px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         font-weight: bold;
+        width: 250px;
+        margin: auto;
         font-size: 16px;
         text-align: center;
         z-index: 10;
+        
         // position: absolute;
         // top: 120%;
     }
     .button--light {
-        margin-top: 15px;
+        // margin-top: 15px;
         width: 100%;
         border: none!important;
     }

@@ -8,7 +8,7 @@ const Contact = () => {
       </Head>
       <Nav/>
       <div className='container'>
-        <h2>Связаться <br></br>с нами</h2>
+        <h1>Связаться <br></br>с нами</h1>
 
         <div className='contact_texts'>
           <div className='contact_text'>
@@ -19,8 +19,8 @@ const Contact = () => {
           <div className='contact_text'>
             <p>Телефоны</p>
             <span>
-              <a href='tel:+77272501500'>+7 (727) 250-15-00</a>; 
-              <br></br><a href='tel:+77024372018 '>+7 (702) 437-20-18</a>
+              <a href='tel:+77003505000'>+7 (700) 350-50-00</a>; 
+              {/* <br></br><a href='tel:+77024372018 '>+7 (702) 437-20-18</a> */}
             </span>
           </div>
 
@@ -38,9 +38,10 @@ const Contact = () => {
         </div>
       </div>
       <div className='map'>
-      <iframe className="mb-5" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.874032522479!2d76.92227931544637!3d43.254061779137075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836eb1531b39b3%3A0x97eb2ec73bccce23!2z0YPQu9C40YbQsCDQotC-0LvQtSDQkdC4IDEwMSwg0JDQu9C80LDRgtGLIDA1MDAxMg!5e0!3m2!1sru!2skz!4v1620702757626!5m2!1sru!2skz" width="100%" height={550} frameBorder={0} style={{border: 0}} allowFullScreen aria-hidden="false" tabIndex={0} />
+      <iframe className="mb-5" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d363.2342540653101!2d76.92419441255856!3d43.254061779137025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836eb1531b39b3%3A0x97eb2ec73bccce23!2z0YPQu9C40YbQsCDQotC-0LvQtSDQkdC4IDEwMSwg0JDQu9C80LDRgtGLIDA1MDAxMg!5e0!3m2!1sru!2skz!4v1622551841972!5m2!1sru!2skz" width="100%" height={550} frameBorder={0} style={{border: 0}} allowFullScreen aria-hidden="false" tabIndex={0} />
       {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.874032522479!2d76.92227931544637!3d43.254061779137075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836eb1531b39b3%3A0x97eb2ec73bccce23!2z0YPQu9C40YbQsCDQotC-0LvQtSDQkdC4IDEwMSwg0JDQu9C80LDRgtGLIDA1MDAxMg!5e0!3m2!1sru!2skz!4v1620702757626!5m2!1sru!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> */}
       </div>
+      {/* <iframe src="" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> */}
     </div>
   )
 }

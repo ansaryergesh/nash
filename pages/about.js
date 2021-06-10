@@ -19,8 +19,8 @@ const About = () => {
         <Nav/>
         <div className='container'>
           <div className='header--content '>
-            <h2>Nash
-              <br></br>company</h2>
+            <h1>Nash
+              <br></br>company</h1>
             <p>Наши специалисты создали продукт, благодаря которому Вам предоставляется
               эксклюзивная возможность в онлайн режиме, из любой точки РК, общаться со своими
               юристами, заказывать и получать необходимые услуги, оплачивать их с
@@ -32,7 +32,7 @@ const About = () => {
 
           </div>
           <div className='buttons'>
-            <a href='/getservice'><input type='button' onClick={() => renderForm()} className='button' value='Физические лица'/></a>
+            <a href='/dlya-fizicheskix-lic'><input type='button' onClick={() => renderForm()} className='button' value='Физические лица'/></a>
             <a href='getservice'><input type='button' onClick={() => renderForm()} className='button button--light' value='Юридические лица'/></a>
           </div>
         </div>
@@ -42,7 +42,7 @@ const About = () => {
         <div className='whyus-block'>
           <div className='whyus_top'>
             <h2>Почему
-              <br></br>мы?</h2>
+              <span> мы? </span></h2>
             <p>МЫ осуществляем взаимодействие со всеми государственными, судебными,
               административным органами управления.</p>
           </div>
@@ -72,10 +72,12 @@ const About = () => {
 
         <div className='practice'>
           <div className='practice--top'>
-            <h1>
+          <div className='practice_item'>
+            <h2>
               Наша
               <br></br>практика
-            </h1>
+            </h2>
+            </div>
             <div className='practice_item'>
               <h1>6083</h1>
               <p>Реализованных дел</p>
@@ -122,7 +124,7 @@ const About = () => {
           </p>
 
           <div className='practice--banner'>
-            <div>
+            <div className='practice--banner--content'>
             <h2>Наша <br></br>практика</h2>
             <p>Качество юридических услуг подтверждено списком выигранных дел и счастливыми
               клиентами. За долгие годы юридической практики компания заработала деловую

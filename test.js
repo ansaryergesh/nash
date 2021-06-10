@@ -1,3 +1,5 @@
-const normaliseNumber = value => value.replace(/[^0-9]/g, "");
+const thousandSeparator = x => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
 
-console.log(normaliseNumber('+7   5555()  '))
+console.log(thousandSeparator('1000000000'))

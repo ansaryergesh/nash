@@ -23,36 +23,47 @@ const CodeModal = ({
         // console.log('hello')
       },10)
     }
-  } 
+  }
+  useEffect(() => {
+    if(isModalOpen) {
+      const input = document.querySelector(".code_input");
+      input.focus()
+    }
+  }, [isModalOpen])
   return (
     <div>
       <Modal isOpen={isModalOpen}>
         <div className='modalka_content'>
           <h3>На ваш номер отправлен  4 значный код</h3>
           <form className='form_register'>
-            <span onClick={() => closeModal()} className='closebtn'>✖</span>
+            {/* <span onClick={() => closeModal()} className='closebtn'>✖</span> */}
             <InputMask
               mask="9999"
-              maskChar=" "
+              maskChar={null}
               name='phone'
               type='tel'
               placeholder='Введите код'
               onChange={e => changeCode(e)}
               value={code}
-              className="my-input"/>
+              className="my-input code_input"/>
               <p className='danger'>{error}</p>
           </form>
 
-          {/* <a href='/getservice' onClick={() => onFirstStep()}>
+          {/* <a href='/dlya-fizicheskix-lic' onClick={() => onFirstStep()}>
             <div className='button'>Отправить код</div>
           </a> */}
 
           <input
-          className='singlebtn'
           type='submit'
-          onClick={(values) => getIdentification(values)}
-          className='button button--light'
+          onClick={() => getIdentification()}
+          className='button button--light code_button'
           value='Отправить код заново'/>
+          <input
+          type='button'
+          onClick={() => closeModal()}
+          // className='button'
+          className='button button--light code_button'
+          value='Отмена'/>
         </div>
       </Modal>
     </div>

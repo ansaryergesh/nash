@@ -22,6 +22,12 @@ class MyDocument extends Document {
 
           <Main />
           <NextScript />
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KBZK7NZF3"></script>
+          <script src='/js/googlescript.js'></script>
+          <script src='/js/myscript.js'></script>
+          <noscript><div><img src="https://mc.yandex.ru/watch/80058913" style={{position: 'absolute', left: '-9999px'}} alt="" /></div></noscript>
         </body>
       </Html>
     )

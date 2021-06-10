@@ -1,9 +1,9 @@
 import axios from 'axios'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import CodeModal from '../shared/CodeModal'
-import {replaceDate} from '../../defaults/extraFunction'
+import {handleFocus, replaceDate} from '../../defaults/extraFunction'
 import cookie from 'js-cookie'
-import { ToastProvider, useToasts } from 'react-toast-notifications'
+import {ToastProvider, useToasts} from 'react-toast-notifications'
 import {Formik, Form, Field} from 'formik';
 import {
   emailValid,
@@ -16,36 +16,79 @@ import {
 } from '../../defaults/validations'
 import Router from 'next/router'
 import Loader from '../loader/Loader'
-import { validage } from '../../defaults/iinValidAge'
+import {validage} from '../../defaults/iinValidAge'
 import swal from 'sweetalert'
 import PhoneMask from '../Masks/PhoneMask'
 import IinMask from '../Masks/IinMask'
 
 const FirstStep = ({setLoading}) => {
-  const { addToast } = useToasts()
+  const {addToast} = useToasts()
   const [formData,
     setFormData] = useState({email: '', phone: '', fio: '', password: '', type: 'Физ лицо'})
-  
+
   const [errors,
     setErrors] = useState({email: '', phone: '', fio: '', password: ''})
-  const [codeError, setCodeError] = useState('')
+  const [codeError,
+    setCodeError] = useState('')
 
   const [modal,
     setModal] = useState(false)
-  
 
-  
   const closeModal = () => {
     setModal(false)
   }
+  
+
 
   const [code,
     setCode] = useState('');
+
+  const repeatCode = () => {
+    setLoading(true)
+    setModal(false)
+    setCode('')
+    setCodeError('')
+    axios.get(`${process.env.BASE_URL}/identification`, {
+      params: {
+        fio: formData.fio,
+        phone: replaceDate(formData.phone),
+        email: formData.email,
+        password: formData.password,
+        type: formData.type,
+        source: 'nashcompany.kz',
+        iin: formData.iin
+      }
+    }).then(res => {
+      console.log(res)
+      setLoading(false)
+    
+      if (res.data.success) {
+        setModal(true)
+
+        // disableScroll.on();
+      }
+      if (!res.data.success) {
+        addToast(res.data.message, {
+          appearance: 'error',
+          autoDismiss: true
+        })
+      }
+    }).catch(err => {
+      setLoading(false)
+      if (err.response) {
+        addToast(err.response.status, {
+          appearance: 'error',
+          autoDismiss: true
+        })
+      }
+    })
+  }
   const getIdentification = (values) => {
-    if(!validage(values.iin)) {
+    console.log(values)
+    console.log('other')
+    if (!validage(values.iin)) {
       swal("Oops!", `Извините, услуга осуществляется лицам достигшие 18 лет.`, "info");
-    }
-    else {
+    } else {
       setLoading(true)
       setFormData(values)
       axios.get(`${process.env.BASE_URL}/identification`, {
@@ -55,62 +98,72 @@ const FirstStep = ({setLoading}) => {
           email: values.email,
           password: values.password,
           type: values.type,
-          source: 'nashcompany.kz'
+          source: 'nashcompany.kz',
+          iin: values.iin
         }
       }).then(res => {
         setLoading(false)
-        console.log(res)
+      
         if (res.data.success) {
           setModal(true)
-        
+
           // disableScroll.on();
         }
-        if(!res.data.success) {
+        if (!res.data.success) {
           addToast(res.data.message, {
             appearance: 'error',
-            autoDismiss: true,
+            autoDismiss: true
           })
         }
-      })
-      .catch(err=> {
+      }).catch(err => {
         setLoading(false)
-        if(err.response) {
+        if (err.response) {
           addToast(err.response.status, {
             appearance: 'error',
-            autoDismiss: true,
+            autoDismiss: true
           })
         }
       })
     }
-   
+
   }
 
   const firstStep = (codeVal) => {
     setLoading(true)
+    const object = {
+      fio: formData.fio,
+      iin: formData.iin,
+      phone: replaceDate(formData.phone),
+      email: formData.email,
+      password: formData.password,
+      type: formData.type,
+      code: codeVal,
+      source: cookie.get('utm_source') + "_1" || 'nashcompany.kz'
+    }
+    if (cookie.get('utm_source') !== undefined) {
+      object.utm_source = cookie.get('utm_source')
+      object.click_id = cookie.get('click_id')
+      // object.webID = cookie.get('web_id')
+    }
     axios.get(`${process.env.BASE_URL}/stepOne`, {
-      params: {
-        fio: formData.fio,
-        phone: replaceDate(formData.phone),
-        email: formData.email,
-        password: formData.password,
-        type: formData.type,
-        code: codeVal,
-        source: cookie.get('utm_source')+"_1" || 'nashcompany.kz'
-      }
+      params: 
+       object
+      
     }).then(res => {
-      setLoading(false)
       console.log(res)
+      setLoading(false)
+   
       if (res.data.success) {
         cookie.set('token', res.data.token)
         cookie.set('lead_id', res.data.id)
         cookie.set('step', 2)
-        Router.push('/getservice?step=2')
+        Router.push('/dlya-fizicheskix-lic?step=2')
       }
-      if(!res.data.success) {
+      if (!res.data.success) {
         setCodeError(res.data.message)
-        addToast(finalErr, {
+        addToast(res.data.message, {
           appearance: 'error',
-          autoDismiss: true,
+          autoDismiss: true
         })
       }
     })
@@ -129,9 +182,6 @@ const FirstStep = ({setLoading}) => {
     getIdentification()
   }
 
-  
-
-  
   const onChange = (e) => {
     const name = e.target.name;
     setFormData({
@@ -149,19 +199,22 @@ const FirstStep = ({setLoading}) => {
           fio: '',
           password: '',
           type: 'Физ лицо',
-          iin: '',
+          iin: ''
         }}
-          onSubmit={(values) => {getIdentification(values)}}>
+          onSubmit={(values) => {
+          getIdentification(values)
+        }}>
           {({errors, touched}) => (
             <Form>
               <Field
                 type='text'
                 name='fio'
+                className='capitalize'
                 validate={acceptCirrilic}
                 placeholder='ФИО'
-                autocomplete='off'/>
-               {(errors.fio && touched.fio) ? <p className='text-danger'>{errors.fio}</p> :  <p className='text-danger'></p>}
-              {formData.phone}
+                autocomplete='off'/> {(errors.fio && touched.fio)
+                ? <p className='text-danger'>{errors.fio}</p>
+                : <p className=''></p>}
               <Field
                 name='phone'
                 className='form-control'
@@ -169,7 +222,9 @@ const FirstStep = ({setLoading}) => {
                 type='tel'
                 validate={phoneValidation}
                 component={PhoneMask}></Field>
-                 {(errors.phone && touched.phone) ? <p className='text-danger'>{errors.phone}</p> :  <p className='text-danger'></p>}
+              {(errors.phone && touched.phone)
+                ? <p className='text-danger'>{errors.phone}</p>
+                : <p className=''></p>}
 
               <Field
                 name='iin'
@@ -178,40 +233,56 @@ const FirstStep = ({setLoading}) => {
                 type='tel'
                 validate={iinValidation}
                 component={IinMask}></Field>
-                 {(errors.iin && touched.iin) ? <p className='text-danger'>{errors.iin}</p> :  <p className='text-danger'></p>}
+              {(errors.iin && touched.iin)
+                ? <p className='text-danger'>{errors.iin}</p>
+                : <p className=''></p>}
 
               <Field
                 type='text'
                 name='email'
                 validate={emailValid}
                 placeholder='Email'
-                autocomplete='off'/>
-                 {(errors.email && touched.email) ? <p className='text-danger'>{errors.email}</p> :  <p className='text-danger'></p>}
+                autocomplete='off'/> {(errors.email && touched.email)
+                ? <p className='text-danger'>{errors.email}</p>
+                : <p className=''></p>}
 
               <Field
                 type='password'
                 name='password'
                 validate={passwordValid}
                 placeholder='Придумайте пароль'
-                autocomplete='off'/> 
-                 {(errors.password && touched.password) ? <p className='text-danger'>{errors.password}</p> :  <p className='text-danger'></p>}
+                autocomplete='off'/> {(errors.password && touched.password)
+                ? <p className='text-danger'>{errors.password}</p>
+                : <p className=''></p>}
 
-              <input
-                className='singlebtn'
-                type='submit'
-                className='button'
-                value='Отправить'/>
+              <div className='firststep_banner'>
+                <div className='firststep_banner--img'>
+                  <img alt='image' className='firststep' src='/img/form/firststep.svg'/>
+                </div>
+                <div className='firststep_banner--button'>
+                  <input
+                    className='singlebtn'
+                    type='submit'
+                    className='button'
+                    onClick={() =>handleFocus()}
+                    value='Хочу скидки'/>
+                  <b>Следующий шаг<br></br> даст 50% скидки</b>
+                </div>
+
+              </div>
+
             </Form>
           )}
         </Formik>
+
         <CodeModal
-          isModalOpen={modal}
+          isModalOpen={true}
           closeModal={closeModal}
           code={code}
           setCode={setCode}
           onFirstStep={firstStep}
           error={codeError}
-          getIdentification={getIdentification}/> {/* <form onSubmit={(e) => onSubmit(e)}>
+          getIdentification={repeatCode}/> {/* <form onSubmit={(e) => onSubmit(e)}>
 
         <input
           type='text'
@@ -264,7 +335,13 @@ const FirstStep = ({setLoading}) => {
 }
 
 const FirstReg = ({setLoading}) => {
-  return(
+  useEffect(() => {
+    var form = document.querySelector('.form_register');
+    
+    form.scrollIntoView({block: 'center', behavior: 'smooth'})
+
+  },[])
+  return (
     <ToastProvider>
       <FirstStep setLoading={setLoading}/>
     </ToastProvider>

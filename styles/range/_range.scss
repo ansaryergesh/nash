@@ -1,5 +1,7 @@
 .range {
+  width: 100%;
   margin-top: 25px;
+
   position: relative;
   &__input {
     width: 100%;
@@ -46,7 +48,8 @@
     display: flex;
     justify-content: space-between;
     height: auto;
-    overflow: hidden;
+    // width: 100%;
+    overflow-x: auto;
     margin-top: 16px; 
   
     option {

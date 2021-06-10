@@ -1,5 +1,5 @@
 .contact {
-    h2 {
+    h1,h2 {
         font-size: calc(55px + (80 - 55) * ((100vw - 768px) / (1600 - 768)));
         line-height: calc(38px + (60 - 38) * ((100vw - 768px) / (1600 - 768)));
         font-weight: bold;
@@ -29,6 +29,7 @@
             }            
             span {
                 font-size: 21px;
+                font-weight: bold;
             }
         }
     }

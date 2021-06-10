@@ -1,10 +1,12 @@
 export const emailValid = val => {
+  // const value = val.split(' ').join('');
+  const value = val.trim()
   let error;
-  if (!val) {
+  if (!value) {
     error = 'Поле Email обязательно для заполнения'
   }
-  if (val) {
-    let emailvalid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
+  if (value) {
+    let emailvalid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
     if (!emailvalid) {
       error = 'Неправильный email'
     }
@@ -78,7 +80,7 @@ export const phoneValidation = (val) => {
     error = ''
   }
   if (phoneval.length !== 16) {
-    error = 'Заполните все поля'
+    error = 'Неправильный телефон номер'
   }
   if (phoneval.length === 16 && phoneCheck(val) === false) {
     error = 'Нет соответствующего оператора'
@@ -99,40 +101,35 @@ export const passwordValid = val => {
 }
 
 const checkStringName = val => {
-  if (val && val.replace(/\s+$/, '').split(/\W+/).length > 1) {
+  if (val && val.replace(/\s+$/, '').split(/\W+/).length  <2) {
+    return false;
+  }else {
     return true;
   }
-  return false;
 }
 
 export const acceptCirrilic = val => {
   var falsy = /[a-zA-Z0-9_"*/]/i.test(val)
   let error = '';
+  var str = val;
+  str = str.replace(/(^\s*)|(\s*$)/gi,"");
+  str = str.replace(/[ ]{2,}/gi," ");
+  str = str.replace(/\n /,"\n");
+  let length = val ? str.split(' ').length : 0;
   if (!val) {
     error = 'Поле обязательно для заполнения'
   }
   if (val) {
-    if(checkStringName(val) === false) {
-      if(falsy=== true) {
-        error = 'Нужно вводить только на кириллице'
-      }
-    }if(checkStringName(val) === true) {
-      if(falsy === false) {
-        error = ''
-      }
+    if(falsy ===true) {
+      error = 'Введите только на киррилице'
     }
-    if(checkStringName(val) === false) {
-      if(falsy === false) {
-        error = 'Фамилия и Имя обязательны для заполнения (Отчество необязательно)'
-      }
+    if(falsy== false && parseInt(length)<2) {
+      error = 'Введите полное имя ( Например: Абаев Абылай)'
     }
-    if(checkStringName(val) === true) {
-      if(falsy === true) {
-        error = 'Нужно вводить только на кириллице'
-      }
-    }
+    
   }
 
+  // return length + `${falsy}`;
   return error;
 }
 
@@ -174,7 +171,7 @@ export const iinValidation = (val) => {
     error = 'Поле обязательно для заполнения'
   }
   if (value && value.length !== 12) {
-    error = 'Заполните все поля';
+    error = 'Неправильный ИИН';
   }
 
   if (value && value.length === 12) {

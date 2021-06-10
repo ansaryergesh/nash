@@ -1,110 +1,134 @@
 import {Container, Row, Col} from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.css";
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
+import {slide as Menu} from "react-burger-menu";
 import {CSSTransitionGroup} from 'react-transition-group';
-const Nav = () => {
+import Link from 'next/link'
+const AppLink = ({children, className, href}) =>
+  <Link href={href}>
+    <a className={className}>{children}</a>
+  </Link>
+
+const Nav = (props) => {
   const router = useRouter()
   const [burger,
     setBurger] = useState(false)
   const handleBurger = () => {
     setBurger(!burger)
   }
+  
+  useEffect(() => {
+    if(!burger) {
+      document.documentElement.style.height= '100%';
+      document.body.style.overflowY= 'hidden';
+      console.log('true')
+    }
+    if(burger) {
+      document.body.style.overflowY= 'unset';
+      console.log('false')
+    }
+  }, [burger])
   return (
     <div>
       <div className='container'>
         <div className='navigation'>
-          <a href='/'>
-            <img
+          <AppLink href='/'>
+            <img alt='image'
               className='logo'
               src={router.pathname === '/'
-              ? '/img/logo/logo.svg'
+              ? '/img/logo/logoBlack.svg'
               : '/img/logo/logoBlack.svg'}/>
-          </a>
+          </AppLink>
           <div className='navigations'>
             <ul className='navigation--contacts'>
               <li>
-                <img src='/img/phone.svg'/>
-                +7 777 777 77 77</li>
+                <img alt='image' src='/img/phone.svg'/>
+                <a href='tel:+77003505000'></a>+7 700 350 50 00</li>
               <li>
                 <a href='#'>
-                  <img src='/img/insta.svg'/>
+                  <img alt='image' src='/img/insta.svg'/>
                 </a>
               </li>
 
               <li>
                 <a href='#'>
-                  <img src='/img/facebook.svg'/>
+                  <img alt='image' src='/img/facebook.svg'/>
                 </a>
               </li>
 
             </ul>
             <ul className='navigation--menu'>
               <li>
-                <a href='/about'>О компании</a>
+                <AppLink href='/about'>О компании</AppLink>
               </li>
               <li>
-                <a href='/uslugi'>Услуги</a>
+                <AppLink href='/uslugi'>Услуги</AppLink>
               </li>
               <li>
-                <a href='/praktika'>Практика</a>
+                <AppLink href='/praktika'>Практика</AppLink>
               </li>
               <li>
-                <a href='/news'>Пресс-центр</a>
+                <AppLink href='/news'>Пресс-центр</AppLink>
               </li>
               <li>
-                <a href='contacts'>Контакты</a>
+                <AppLink href='contacts'>Контакты</AppLink>
+              </li>
+              <li>
+                <a href='/ПУБЛИЧНАЯ ОФЕРТА.pdf' target='_blank'>Публичная оферта</a>
               </li>
             </ul>
 
           </div>
 
         </div>
-
         <div className='navigation_mobile'>
-          <input
-            type="checkbox"
-            name="main-nav"
-            onClick={() => handleBurger()}
-            checked={burger}
-            id="main-nav"
-            class="burger-check"/>
+          <Menu {...props} onStateChange={() => handleBurger()} >
+          
+            <AppLink className="menu-item" href="/">
+              Главная страница
+            </AppLink>
 
-          <div onClick={() => handleBurger()} className='burger'>
-            <span></span>
-          </div>
+            <AppLink className="menu-item" href="/about">
+              О компании
+            </AppLink>
+            <AppLink className="menu-item" href="/uslugi">
+              Услуги
+            </AppLink>
+            <AppLink className="menu-item" href="/praktika">
+              Практика
+            </AppLink>
+
+            <AppLink className="menu-item" href="/news">
+              Пресс-центр
+            </AppLink>
+            <AppLink className="menu-item" href="/contacts">
+              Контакты
+            </AppLink>
+            <a href='/ПУБЛИЧНАЯ ОФЕРТА.pdf' className="menu-item" target='_blank'>Публичная оферта</a>
+            <hr></hr>
+            <a href='tel:+77003505000' className="menu-item">
+              <i className='fa fa-phone'></i>+7 700 350 50 00
+            </a>
+            <div className='socials'>
+              <a className="menu-item" href='#'>
+                <i className='fa fa-instagram'></i>
+              </a>
+              <a className="menu-item" href='#'>
+                <i className='fa fa-facebook'></i>
+              </a>
+              <p className='menu-item address'>
+                <i className='fa fa-map-marker'></i>
+                <span>г. Алматы. Ул. Толе би 101 БЦ "Толе би"
+</span>
+              </p>
+            </div>
+            
+          </Menu>
+          <a className='mob_phone' href='tel:+77003505000'>+7700 350 5000</a>
           <a href='/'>
-            <img className='logo' src='/img/logo/logoBlack.svg'/>
+            <img alt='image' className='logo' src='/img/logo/justlogo.png'/>
           </a>
-          {burger &&   <div className='navigations'>
-          <ul className='navigation--menu'>
-            <li><a href='/about'>О компании</a></li>
-            <li><a href='/uslugi'>Услуги</a></li>
-            <li><a href='/praktika'>Практика</a></li>
-            <li><a href='/news'>Пресс-центр</a></li>
-            <li><a href='contacts'>Контакты</a></li>
-          </ul>
-          <ul className='navigation--contacts'>
-            <li>
-              <img src='/img/phone.svg'/>
-              +7 777 777 77 77</li>
-            <li>
-              <a href='#'>
-                <img src='/img/insta.svg'/>
-              </a>
-            </li>
-
-            <li>
-              <a href='#'>
-                <img src='/img/facebook.svg'/>
-              </a>
-            </li>
-
-          </ul>
-         
-
-          </div>}
-        
 
         </div>
       </div>

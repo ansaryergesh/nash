@@ -3,8 +3,14 @@
     display: flex;
     justify-content: space-around;
 
+    @media(max-width:768px) {
+      align-items: center;
+    }
     .radiolabel {
-      font-size: 18px;
+      font-size: calc(15px + (18 - 15) * ((100vw - 768px) / (1600 - 768)));
+      @media(max-width:768px) {
+        margin-top: 5px;
+      }
     }
 }
 
@@ -47,8 +53,15 @@
 .check-group {
   display: block;
   margin-bottom: 15px;
-}
 
+}
+.srok_month {
+  font-size: 12px;
+  position: absolute;
+  color: rgb(201, 200, 200);
+  top: -25px;
+  left: 30%;
+}
 .check-group input {
   padding: 0;
   height: initial;
@@ -56,6 +69,9 @@
   margin-bottom: 0;
   display: none;
   cursor: pointer;
+  @media(max-width:425px) {
+    transform: translateX(25%);
+  }
 }
 
 .check-group label {

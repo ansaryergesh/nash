@@ -5,11 +5,27 @@ import Nav from '../components/shared/Nav';
 import Footer from '../components/shared/Footer';
 import Router from 'next/router'
 import Utm from '../components/Utm/Utm';
+import FixedBtn from '../components/shared/FixedBtn';
+import NProgress from "nprogress"
 
+Router.onRouteChangeStart = url => {
+  NProgress.start()
+}
+
+Router.onRouteChangeComplete = () => NProgress.done()
+
+Router.onRouteChangeError = () => NProgress.done()
 class MyApp extends App {
   componentDidMount() {
+
     Router.events.on('routeChangeComplete', () => {
-      window.scrollTo(0,0)
+      
+      document.body.style.overflowY= 'unset';
+      document.documentElement.style.height= 'inherit';
+      if(Router.pathname !== '/dlya-fizicheskix-lic' || Router.pathname !== '/jurservice') {
+
+        window.scrollTo(0,0)
+      }
     })
   }
   render() {
@@ -20,6 +36,7 @@ class MyApp extends App {
         <Component {...pageProps}/>
         <Footer />
         <Utm />
+        <FixedBtn />
       </>
     )
   }

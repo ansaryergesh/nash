@@ -1,15 +1,21 @@
-import {useState} from "react"
-import {fizservice} from "../../defaults/fizservice"
+import {useEffect, useState} from "react"
+import {fizservice, jurservice} from "../../defaults/fizservice"
 import cookie from 'js-cookie'
 import axios from "axios"
-import Router from "next/router"
+import Router, {useRouter} from "next/router"
 import {Formik, Form, Field} from 'formik';
 import {required} from "../../defaults/validations"
 import Dropzone from "react-dropzone";
+import PriceMask from "../Masks/PriceMask"
+import { handleFocus, replaceDate, thousandSeparator } from "../../defaults/extraFunction"
+import DropFile from "../dropFile/DropFile"
 
-const SecondStep = () => {
-  const [fileNames,
-    setFileNames] = useState([]);
+const SecondStep = ({setLoading}) => {
+  const router = useRouter()
+  const pathname = router.pathname
+  const listofservice = router.pathname === '/dlya-fizicheskix-lic' ? fizservice  : jurservice
+  const [files,
+    setFiles] = useState([]);
   const [formData,
     setFormData] = useState({
     id: cookie.get('lead_id'),
@@ -18,38 +24,55 @@ const SecondStep = () => {
     sphere: '1',
     amount: ''
   })
-  const onChange = e => {
-    const name = e.target.name
-    setFormData({
-      ...formData,
-      [name]: e.target.value
-    })
-  }
-  const handleDrop = acceptedFiles => setFileNames(acceptedFiles.map(file => file.name));
+  
 
   const stepSecond = (values) => {
-
-
+    setLoading(true)
+    // console.log(replaceDate(values.amount))
+    const sphereVal = listofservice.find(x=>x.id=== values.sphere).name
+    const object = {
+      id: values.id,
+      token: values.token,
+      description: values.description,
+      sphere: sphereVal,
+      amount: replaceDate(values.amount)
+    }
+    if (cookie.get('utm_source') !== undefined) {
+      object.utm_source = cookie.get('utm_source')
+      object.click_id = cookie.get('click_id')
+      // object.webID = cookie.get('web_id')
+    }
     axios
       .get(`${process.env.BASE_URL}/stepTwo`, {
-      params: {
-        id: values.id,
-        token: values.token,
-        description: values.description,
-        sphere: values.sphere,
-        amount: values.amount
-      }
+      params: 
+        object
+      
     })
       .then(res => {
+        setLoading(false)
         // console.log(res)
         if (res.data.success) {
-          Router.push('/getservice?step=3')
+          Router.push('/dlya-fizicheskix-lic?step=3')
+          if(pathname==='/jurservice') {
+            cookie.set('stepjur', 2)
+          }
+          if(pathname === '/dlya-fizicheskix-lic') {
+            cookie.set('step',3)
+          }
           cookie.set('step', 3)
-          cookie.set('amount', formData.amount)
+          cookie.set('amount', replaceDate(values.amount))
         }
         if (!res.data.success) {}
       })
   }
+
+  useEffect(() => {
+    var form = document.querySelector('.form_register');
+    console.log(form)
+    form.scrollIntoView({block: 'center', behavior: 'smooth'})
+  
+  },[])
+
   return (
     <div className='form_register'>
       <Formik
@@ -62,50 +85,46 @@ const SecondStep = () => {
       }}
         onSubmit=
         {(values) => {stepSecond(values)}}>
-        {({errors, touched}) => (
+        {({errors, touched, values}) => (
           <Form>
             <Field as='select' validate={required} name='sphere' className='form_select'>
-              {fizservice.map((fiz, index) => (
+              {listofservice.map((fiz, index) => (
                 <option data-img={`/img/uslugi/${index+1}.svg`} value={index + 1}>{fiz.name}</option>
               ))}
             </Field>
             {(errors.sphere && touched.sphere)
               ? <p className='text-danger'>{errors.sphere}</p>
-              : <p className='text-danger'></p>}
+              : <p className=''></p>}
             <Field
               as='textarea'
               name='description'
               validate={required}
               placeholder='Опишите вашу ситуацию'></Field>
+              
             {(errors.description && touched.description)
               ? <p className='text-danger'>{errors.description}</p>
-              : <p className='text-danger'></p>}
-            <Field type='number' validate={required} name='amount' placeholder='Сумма иска'></Field>
+              : <p className=''></p>}
+            <Field name='amount'  type='text' validate={required} component={PriceMask} placeholder='Сумма иска'></Field>
             {(errors.amount && touched.amount)
               ? <p className='text-danger'>{errors.amount}</p>
-              : <p className='text-danger'></p>}
-            <div className='dropfiles'>
-              <Dropzone onDrop={handleDrop}>
-                {({getRootProps, getInputProps}) => (
-                  <div {...getRootProps({ className: "dropzone" })}>
-                    <input {...getInputProps()}/>
-                    <p>Перетащите файлы или щелкните, чтобы выбрать файлы</p>
-                  </div>
-                )}
-              </Dropzone>
-              <div>
-                <strong>Файлы:</strong>
-                <ul>
-                  {fileNames.map(fileName => (
-                    <li key={fileName}>{fileName}</li>
-                  ))}
-                </ul>
+              : <p className=''></p>}
+            <DropFile setFiles={setFiles}/>
+            <div className='firststep_banner'>
+                <div className='firststep_banner--img'>
+                  <img alt='image' className='secondstep' src='/img/form/secondstep.png'/>
+                </div>
+                <div className='firststep_banner--button'>
+                  <input
+                    className='singlebtn'
+                    type='submit'
+                    className='button'
+                    onClick={() => handleFocus()}
+                    value='Далее'/>
+                  <b>Сначала результат<br></br>
+                    потом оплата</b>
+                </div>
+
               </div>
-            </div>
-            <div className='form_buttons'>
-              <input className='transparentbtn button' type='button' value='Вернуться назад'/>
-              <input className='button' type='submit' value='Далее'/>
-            </div>
           </Form>
         )}
 

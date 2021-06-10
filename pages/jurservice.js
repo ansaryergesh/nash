@@ -15,16 +15,16 @@ const GetService = () => {
   const [loading, setLoading] = useState(false)
   const [cookieStep, setCookieStep] = useState('')
   useEffect(() => {
-    setCookieStep(cookie.get('step'))
-  }, [cookie.get('step')])
+    setCookieStep(cookie.get('stepjur'))
+  }, [cookie.get('stepjur')])
   useEffect(() => {
-    if(!cookie.get('step')) {
+    if(!cookie.get('stepjur')) {
       router.push('/jurservice')
     }
-    if(cookie.get('step') === '2') {
+    if(cookie.get('stepjur') === '2') {
       router.push('/jurservice?step=2')
     }
-    if(cookie.get('step') === '3') {
+    if(cookie.get('stepjur') === '3') {
       router.push('/jurservice?step=3')
     }
   },[])
@@ -33,7 +33,7 @@ const GetService = () => {
       {loading && <Loader />}
       <Head>
         <title>
-          Получить услугу
+          Получить услугу | Юр. лицо
         </title>
       </Head>
       <div className='header'>
@@ -43,8 +43,9 @@ const GetService = () => {
       
       <div className='container'>
      
-        <div className='form--header'>
-          <h3>Услуги юр лицам</h3>
+        
+      <div className='form_headings'>
+          <b>Услуги юр. лицам</b>
           <h2>Получить
             <br></br>услугу:</h2>
         </div>
@@ -57,9 +58,9 @@ const GetService = () => {
           </ul>
         </div>
         
-        {cookie.get('step') === undefined && <FirstStep setLoading={setLoading}/>}
-        {cookie.get('step') === '2' && step==='2' && <SecondStep />}
-        {cookie.get('step') === '3' && step==='3' && <ThirdStep />}
+        {cookie.get('stepjur') === undefined && <FirstStep setLoading={setLoading}/>}
+        {cookie.get('stepjur') === '2' && step==='2' && <SecondStep setLoading={setLoading}/>}
+        {cookie.get('stepjur') === '3' && step==='3' && <ThirdStep setLoading={setLoading}/>}
         
         {/* <SecondStep /> */}
         {/* <ThirdStep /> */}

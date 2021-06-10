@@ -1,29 +1,73 @@
+import Link from 'next/link'
+const AppLink = ({children, className, href}) =>
+  <Link href={href}>
+    <a className={className}>{children}</a>
+  </Link>
+import {useRouter} from 'next/router'
 const Footer = () => {
-  return(
-    <div className='container'>
+  const router = useRouter()
+  const pathname = router.pathname
+  return (
+    <div className={`container ${pathname.includes('dogovor') && 'd-none'}`}>
       <div className='footer'>
         <div className='footer--top'>
           <div className='footer--logo'>
-            <a href='/'><img src='/img/logo/logoBlack.svg' /> </a>
+            <AppLink href='/'>
+            <img alt='image' src='/img/logo/logoBlack.svg'/> 
+            </AppLink>
             <h4>Решаемо все!</h4>
           </div>
- 
 
-          <ul>
-            <li><span>Следуй за нами</span></li>
-            <li><a href='#'><i className='fa fa-facebook' /></a></li>
-            <li><a href='#'><i className='fa fa-instagram' /></a></li>
+          <ul className='footer--social'>
+            <li>
+              <span>Следуй за нами</span>
+            </li>
+            <li>
+              <AppLink href='#'><img alt='image' src='/img/insta.svg'/></AppLink>
+            </li>
+
+            <li>
+              <AppLink href='#'><img alt='image' src='/img/facebook.svg'/></AppLink>
+            </li>
           </ul>
+          <div className='footer--mob'>
+            <AppLink href='/'><img alt='image' className='logo' src='/img/logo/logoBlack.svg'/>
+            </AppLink>
+            <ul className='footer--mob__social'>
+            <li>
+            </li>
+            <li>
+              <a href='#'><img alt='image' src='/img/insta.svg'/></a>
+            </li>
+
+            <li>
+              <a href='#'><img alt='image' src='/img/facebook.svg'/></a>
+            </li>
+          </ul>
+          </div>
+          
         </div>
         <div className='footer--links'>
           <p>Copyright 2021 © NASH company - все права защищены</p>
           <ul>
-            <li><a href='/about'>О компании</a></li>
-            <li><a href='/uslugi'>Услуги</a></li>
-            <li><a href='/praktika'>Практика</a></li>
-            <li><a href='/news'>Пресс центр</a></li>
-            <li><a href='#'>Отзывы</a></li>
-            <li><a href='/contacts'>Контакт</a></li>
+            <li>
+              <AppLink href='/about'>О компании</AppLink>
+            </li>
+            <li>
+              <AppLink href='/uslugi'>Услуги</AppLink>
+            </li>
+            <li>
+              <AppLink href='/praktika'>Практика</AppLink>
+            </li>
+            <li>
+              <AppLink href='/news'>Пресс центр</AppLink>
+            </li>
+            <li>
+              <AppLink href='/feedback'>Оставить отзыв</AppLink>
+            </li>
+            <li>
+              <AppLink href='/contacts'>Контакт</AppLink>
+            </li>
           </ul>
         </div>
       </div>

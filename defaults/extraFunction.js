@@ -22,3 +22,22 @@ export const amountSpace = (val) => {
   }
   return val
 }
+
+
+export const thousandSeparator = x => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+var scrollToElement = require('scroll-to-element');
+
+
+export const handleFocus =() => {
+  setTimeout(() => {
+    scrollToElement('.text-danger', {
+      offset: 0,
+      align: 'middle',
+      ease: 'outExpo',
+      duration: 600
+    });
+  },100)
+}

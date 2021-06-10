@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import {useState} from 'react'
 import Feedback from '../components/shared/Feedback'
 import Header from '../components/shared/Header'
 import ModalService from '../components/shared/ModalService'
 import Nav from '../components/shared/Nav'
 import ServiceList from '../components/shared/ServiceList'
-import {fizservice} from '../defaults/fizservice'
+import {fizservice, jurservice} from '../defaults/fizservice'
 
 export default function Home() {
   const [modal,
@@ -15,6 +15,8 @@ export default function Home() {
   const closeModal = () => {
     setModal(false)
   }
+  const [type,setType] = useState('fiz')
+  const listofservice = type==='fiz' ? fizservice : jurservice
   return (
     <div className='home'>
       <Head>
@@ -24,22 +26,8 @@ export default function Home() {
       </Head>
       <Header/>
       <div className='container'>
-        <ul className='advantage'>
-          <li className='advantage--item'><img src='/img/advantage1.svg'/>
-            <p>95% выигранных
-              <br></br>
-              дел</p>
-          </li>
-          <li className='advantage--item'><img src='/img/advantage2.svg'/>
-            <p>Более 10 лет<br></br>
-              на рынке</p>
-          </li>
-          <li className='advantage--item'><img src='/img/advantage3.svg'/>
-            <p>Работаем по<br></br>
-              всему РК</p>
-          </li>
-        </ul>
-        <div className='ads'>
+       
+        {/* <div className='ads'>
           <div className='ads--content'>
             <h1>Оплати за результат сразу но со скидкой</h1>
             <p>Акция!
@@ -50,12 +38,12 @@ export default function Home() {
           </div>
 
           <div className='buttons'>
-          <a href='/getservice'><input type='button' className='button' value='Физические лица'/></a>
+          <a href='/dlya-fizicheskix-lic'><input type='button' className='button' value='Физические лица'/></a>
           <a href='/jurservice'><input type='button' className='button button_light' value='Юридические лица '/></a>
           </div>
-        </div>
+        </div> */}
 
-        <div className='whyus'>
+        {/* <div className='whyus'>
           <div className='whyus--item'>
             <div className='whyus--images'>
               <img className='image1' src='/img/plant.png'/>
@@ -101,16 +89,34 @@ export default function Home() {
             </div>
           </div>
 
-        </div>
+        </div> */}
+      
+      <Feedback/>
         <div className='services'>
+        <ul className='advantage'>
+          <li className='advantage--item'><img src='/img/advantage1.svg'/>
+            <p>95% выигранных
+              <br></br>
+              дел</p>
+          </li>
+          <li className='advantage--item'><img src='/img/advantage2.svg'/>
+            <p>Более 10 лет<br></br>
+              на рынке</p>
+          </li>
+          <li className='advantage--item'><img src='/img/advantage3.svg'/>
+            <p>Работаем по<br></br>
+              всему РК</p>
+          </li>
+        </ul>
           <div className='services--header'>
-            <span className='active'>Услуги физическим лицам</span>
-            <span>Услуги юридическим лицам</span>
+            <span className={type==='fiz' && 'active'} onClick={() => setType('fiz')}>Физические лица</span>
+            <span className={type==='jur' && 'active'} onClick={() => setType('jur')}>Юридические лица</span>
           </div>
-          <ServiceList list={fizservice} type='fiz' setModal={setModal} setId={setId}/>
-          <ModalService isModalOpen={modal} closeModal={closeModal} id={id} type='fiz'/>
+          <ServiceList list={listofservice} type={type} setModal={setModal} setId={setId}/>
+          <ModalService isModalOpen={modal} closeModal={closeModal} id={id} type={type}/>
         </div>
-        <Feedback/>
+
+        
       </div>
     </div>
   )
