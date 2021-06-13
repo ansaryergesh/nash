@@ -4,7 +4,15 @@ const FixedBtn = () => {
   const router  = useRouter()
   const pathname = router.pathname
   const checkPath = () => {
-    if(pathname === '/uslugi' || pathname === '/dlya-fizicheskix-lic' || pathname === '/jurservice' || pathname==='/404' || pathname==='/feedback' || pathname.includes('dogovor')) {
+    if(pathname === '/uslugi' ||
+    pathname === '/dlya-fizicheskix-lic' || 
+    pathname === '/jurservice' || 
+    pathname==='/404' || 
+    pathname==='/feedback' || 
+    pathname.includes('dogovor') || 
+    pathname === '/login' ||
+    pathname.includes('cabinet') || 
+    pathname === '/register'  ) {
       return false
     }
     else {

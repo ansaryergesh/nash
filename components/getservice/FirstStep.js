@@ -138,7 +138,7 @@ const FirstStep = ({setLoading}) => {
       password: formData.password,
       type: formData.type,
       code: codeVal,
-      source: cookie.get('utm_source') + "_1" || 'nashcompany.kz'
+      source: cookie.get('utm_source')!== undefined ? cookie.get('utm_source') + "_1" : 'nashcompany.kz'
     }
     if (cookie.get('utm_source') !== undefined) {
       object.utm_source = cookie.get('utm_source')
@@ -154,9 +154,9 @@ const FirstStep = ({setLoading}) => {
       setLoading(false)
    
       if (res.data.success) {
-        cookie.set('token', res.data.token)
-        cookie.set('lead_id', res.data.id)
-        cookie.set('step', 2)
+        cookie.set('token', res.data.token, {expires: 1})
+        cookie.set('lead_id', res.data.id, {expires: 1})
+        cookie.set('step', 2, {expires: 1})
         Router.push('/dlya-fizicheskix-lic?step=2')
       }
       if (!res.data.success) {
@@ -276,7 +276,7 @@ const FirstStep = ({setLoading}) => {
         </Formik>
 
         <CodeModal
-          isModalOpen={true}
+          isModalOpen={modal}
           closeModal={closeModal}
           code={code}
           setCode={setCode}

@@ -32,6 +32,16 @@ const GetService = () => {
   },[])
 
 
+  // useEffect(() => {
+  //   if(cookie.get('step') !== undefined && (cookie.get('lead_id')=== undefined || cookie.get('token') === undefined)){
+  //     console.log('removed')
+  //     cookie.remove('step')
+  //     cookie.remove('lead_id')
+  //     cookie.remove('token')
+  //     router.push('/dlya-fizicheskix-lic')
+  //   }
+  // },[])
+
  
 
   return (

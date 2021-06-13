@@ -23,7 +23,7 @@ const Footer = () => {
               <span>Следуй за нами</span>
             </li>
             <li>
-              <AppLink href='#'><img alt='image' src='/img/insta.svg'/></AppLink>
+              <a href='https://www.instagram.com/nashcompany.kz/' target='_blank'><img alt='image' src='/img/insta.svg'/></a>
             </li>
 
             <li>
@@ -37,7 +37,7 @@ const Footer = () => {
             <li>
             </li>
             <li>
-              <a href='#'><img alt='image' src='/img/insta.svg'/></a>
+              <a href='https://www.instagram.com/nashcompany.kz/' target='_blank'><img alt='image' src='/img/insta.svg'/></a>
             </li>
 
             <li>

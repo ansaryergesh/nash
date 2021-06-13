@@ -13,7 +13,7 @@ const Utm = () => {
   
   const checkUtm = () => {
     if(utm_source === 'guruleads' ||
-      utm_source === 'doaff' || utm_medium==='leadgid'
+      utm_source === 'doaff' || utm_medium==='leadgid' || utm_medium === 'own_sms_traffic'
     ){
       return true
     }else {
@@ -29,9 +29,10 @@ const Utm = () => {
   }
   const checkerUtm = checkUtm()
   const checkSource = checkLength()
-  const clickid = v || click_id || transaction_id
+  const clickid = v || click_id || transaction_id || ''
 
   useEffect(() => {
+    console.log(utm_source)
     if(checkerUtm) {
       cookie.set('click_id', clickid, {expires: 30})
       cookie.set('utm_source', checkSource, {expires: 30})

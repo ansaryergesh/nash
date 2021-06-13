@@ -6,7 +6,6 @@ const Modal = (props) => {
   const close = (e) => {
     e.preventDefault()
     const name = e.target.dataset.name
-    console.log(name)
     if (props.onClose && name==='modalka_block') {
       props.onClose();
     }

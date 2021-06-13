@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
 import {fizservice, jurservice} from "../../defaults/fizservice"
+
 import cookie from 'js-cookie'
 import axios from "axios"
 import Router, {useRouter} from "next/router"
@@ -13,12 +14,17 @@ import DropFile from "../dropFile/DropFile"
 const SecondStep = ({setLoading}) => {
   const router = useRouter()
   const pathname = router.pathname
+  // const {id} = router.query
+  const {step} = router.query;
+  const {type} = router.query;
   const listofservice = router.pathname === '/dlya-fizicheskix-lic' ? fizservice  : jurservice
+  const listofcontinue = type === 'Физ лицо' ? fizservice : jurservice
+  const finalLists = pathname === '/cabinet/continue' ? listofcontinue : listofservice
   const [files,
     setFiles] = useState([]);
   const [formData,
     setFormData] = useState({
-    id: cookie.get('lead_id'),
+    id: cookie.get('lead_id') === undefined ? router.query.id : cookie.get('lead_id'),
     token: cookie.get('token'),
     description: '',
     sphere: '1',
@@ -28,8 +34,9 @@ const SecondStep = ({setLoading}) => {
 
   const stepSecond = (values) => {
     setLoading(true)
+    console.log(values)
     // console.log(replaceDate(values.amount))
-    const sphereVal = listofservice.find(x=>x.id=== values.sphere).name
+    const sphereVal = finalLists.find(x=>x.id=== values.sphere).name
     const object = {
       id: values.id,
       token: values.token,
@@ -50,17 +57,26 @@ const SecondStep = ({setLoading}) => {
     })
       .then(res => {
         setLoading(false)
-        // console.log(res)
+        console.log(res)
         if (res.data.success) {
-          Router.push('/dlya-fizicheskix-lic?step=3')
           if(pathname==='/jurservice') {
-            cookie.set('stepjur', 2)
+            Router.push('/jurservice?step=3')
+            cookie.set('stepjur', 3)
+            cookie.set('amount', replaceDate(values.amount))
           }
           if(pathname === '/dlya-fizicheskix-lic') {
+            Router.push('/dlya-fizicheskix-lic?step=3')
             cookie.set('step',3)
+            cookie.set('amount', replaceDate(values.amount))
           }
-          cookie.set('step', 3)
-          cookie.set('amount', replaceDate(values.amount))
+          if(pathname === '/cabinet/continue') {
+            Router.push({pathname: '/cabinet/continue', query:{
+              step: 3,
+              id: router.query.id,
+              type: type,
+              amount: replaceDate(values.amount)
+            }})
+          }
         }
         if (!res.data.success) {}
       })
@@ -77,7 +93,7 @@ const SecondStep = ({setLoading}) => {
     <div className='form_register'>
       <Formik
         initialValues={{
-        id: cookie.get('lead_id'),
+        id: cookie.get('lead_id') !== undefined ? cookie.get('lead_id') : router.query.id,
         token: cookie.get('token'),
         description: '',
         sphere: '1',
@@ -88,7 +104,7 @@ const SecondStep = ({setLoading}) => {
         {({errors, touched, values}) => (
           <Form>
             <Field as='select' validate={required} name='sphere' className='form_select'>
-              {listofservice.map((fiz, index) => (
+              {finalLists.map((fiz, index) => (
                 <option data-img={`/img/uslugi/${index+1}.svg`} value={index + 1}>{fiz.name}</option>
               ))}
             </Field>

@@ -49,10 +49,6 @@ const CodeModal = ({
               <p className='danger'>{error}</p>
           </form>
 
-          {/* <a href='/dlya-fizicheskix-lic' onClick={() => onFirstStep()}>
-            <div className='button'>Отправить код</div>
-          </a> */}
-
           <input
           type='submit'
           onClick={() => getIdentification()}

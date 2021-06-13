@@ -41,3 +41,18 @@ export const handleFocus =() => {
     });
   },100)
 }
+
+export const getInitials =  (string) => {
+  var names = string.split(' ');
+  
+  return names[0] + " " + names[names.length-1].substring(0,1).toUpperCase() + '.';
+};
+
+
+export const  filterByParam = (arr, criteria) => {
+  return arr.filter(function(obj) {
+    return Object.keys(criteria).every(function(c) {
+      return obj[c] == criteria[c];
+    });
+  });
+}

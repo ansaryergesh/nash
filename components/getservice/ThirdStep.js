@@ -1,13 +1,16 @@
 import axios from "axios"
 import {useEffect, useState} from "react"
 import cookie from 'js-cookie'
-import Router from 'next/router'
+import Router,{useRouter} from 'next/router'
 import swal from 'sweetalert'
 import {amountSpace, handleFocus, parseDate} from "../../defaults/extraFunction"
 
 const ThirdStep = ({setLoading}) => {
+  const router = useRouter()
+  const {id} = router.query;
+  const {amount} = router.query
   useEffect(() => {
-    const summa = cookie.get('amount')
+    const summa = cookie.get('amount') !== undefined ? cookie.get('amount') : amount
     const finalSumma = Math.floor(parseInt(summa) * 0.2)
     const discountSumma = Math.floor(parseInt(finalSumma) / 2)
     if (finalSumma > 200000) {
@@ -79,7 +82,7 @@ const ThirdStep = ({setLoading}) => {
   const stepThird = (e) => {
     e.preventDefault()
     const object = {
-      id: cookie.get('lead_id'),
+      id: cookie.get('lead_id') === undefined ? id : cookie.get('lead_id'),
       token: cookie.get('token'),
       amountPayment: discount,
       date_payment: paymentDate,
@@ -105,7 +108,6 @@ const ThirdStep = ({setLoading}) => {
             Router.push('/')
             cookie.remove('lead_id')
             cookie.remove('step')
-            cookie.remove('token')
             cookie.remove('utm_medium')
             cookie.remove('utm_source')
             cookie.remove('utm_campaign')

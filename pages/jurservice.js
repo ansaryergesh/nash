@@ -28,6 +28,16 @@ const GetService = () => {
       router.push('/jurservice?step=3')
     }
   },[])
+
+  // useEffect(() => {
+  //   if(cookie.get('stepjur') !== undefined && (cookie.get('lead_id')=== undefined || cookie.get('token') === undefined)){
+  //     console.log('removed')
+  //     cookie.remove('stepjur')
+  //     cookie.remove('lead_id')
+  //     cookie.remove('token')
+  //     router.push('/dlya-fizicheskix-lic')
+  //   }
+  // },[])
   return (
     <div className='getservice'>
       {loading && <Loader />}
