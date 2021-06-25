@@ -1,16 +1,27 @@
 import axios from "axios"
 import {useEffect, useState} from "react"
 import cookie from 'js-cookie'
-import Router,{useRouter} from 'next/router'
+import Router, {useRouter} from 'next/router'
 import swal from 'sweetalert'
 import {amountSpace, handleFocus, parseDate} from "../../defaults/extraFunction"
 
 const ThirdStep = ({setLoading}) => {
   const router = useRouter()
   const {id} = router.query;
+  const pathname = router.pathname
+  const {token} = router.query
   const {amount} = router.query
+  const [amountVal,setAmount] = useState(0)
+  const {leadID} = router.query
+  const [aggrToken, setAggrToken] = useState('')
+  const finalAmount = amount ? amount : amountVal
+  const [aggrId,
+    setAggrId] = useState('')
+  const finalID = id || leadID
   useEffect(() => {
-    const summa = cookie.get('amount') !== undefined ? cookie.get('amount') : amount
+    const summa = cookie.get('amount') !== undefined
+      ? cookie.get('amount')
+      : finalAmount
     const finalSumma = Math.floor(parseInt(summa) * 0.2)
     const discountSumma = Math.floor(parseInt(finalSumma) / 2)
     if (finalSumma > 200000) {
@@ -23,6 +34,32 @@ const ThirdStep = ({setLoading}) => {
     console.log(finalSumma)
   }, [cookie.get('amount')])
 
+
+  useEffect(() => {
+    if(token) {
+      console.log(token + 'thisone')
+      setAggrToken(token)
+    }
+
+  }, [token])
+  useEffect(() => {
+    if (pathname === '/aggrement' && aggrToken) {
+      console.log('yes')
+      axios
+        .get(`${process.env.BASE_URL}/getDataSign?token=${aggrToken}`)
+        .then(res => {
+          console.log(aggrToken)
+          console.log(res)
+          if (!res.data.id) {
+            console.log('this')
+            router.push('/')
+          } else {
+            setAggrId(res.data.id)
+            setAmount(parseInt(res.data.amount))
+          }
+        })
+    }
+  }, [aggrToken])
 
   const [summa,
     setSumma] = useState(0)
@@ -57,10 +94,10 @@ const ThirdStep = ({setLoading}) => {
     const month = parseInt(e.target.value)
     setSrok(e.target.value)
     setPaymentDate(parseDate(month))
-    if(e.target.value>2) {
+    if (e.target.value > 2) {
       const element = document.querySelector('.range__list')
       element.scrollLeft = -300;
-    }else {
+    } else {
       const element = document.querySelector('.range__list')
       element.scrollLeft = 300;
     }
@@ -70,19 +107,49 @@ const ThirdStep = ({setLoading}) => {
     const monthVal = parseInt(month)
     setSrok(month)
     setPaymentDate(parseDate(monthVal))
-    if(monthVal>3) {
+    if (monthVal > 3) {
       const element = document.querySelector('.range__list')
       element.scrollLeft = 200;
-    }else {
+    } else {
       const element = document.querySelector('.range__list')
       element.scrollRight = 200;
     }
   }
 
+  const aggrementSbmt = e => {
+    e.preventDefault()
+    setLoading(true)
+    axios
+      .get(`${process.env.BASE_URL}/removeShortUrl`, {
+      params: {
+        id: aggrId,
+        typePayment: predoplata
+          ? 'Предоплата'
+          : 'Постоплата',
+        period: srok,
+        date_payment: paymentDate,
+        amountPayment: discount
+      }
+    })
+      .then(res => {
+        if (res.status === 200) {
+          swal("Успешно!", `Ваша заявка отправлена в Nash Company. Вам сейчас перезвонят с номера +7(700)350-50-00`, "success").then(() => {
+            router.push('/')
+          })
+        }
+        setLoading(false)
+      })
+      .catch(err => {
+        setLoading(false)
+      })
+  }
+
   const stepThird = (e) => {
     e.preventDefault()
     const object = {
-      id: cookie.get('lead_id') === undefined ? id : cookie.get('lead_id'),
+      id: cookie.get('lead_id') === undefined
+        ? finalID
+        : cookie.get('lead_id'),
       token: cookie.get('token'),
       amountPayment: discount,
       date_payment: paymentDate,
@@ -104,8 +171,8 @@ const ThirdStep = ({setLoading}) => {
         setLoading(false)
         console.log(res)
         if (res.data.success) {
-          swal("Успешно!", `Ваша заявка отправлена в Nash Company. Ждите звонок от оператора`, "success").then(() => {
-            Router.push('/')
+          swal("Успешно!", `Ваша заявка отправлена в Nash Company. Вам сейчас перезвонят с номера +7(700)350-50-00`, "success").then(() => {
+            Router.push('/cabinet/requests')
             cookie.remove('lead_id')
             cookie.remove('step')
             cookie.remove('utm_medium')
@@ -116,10 +183,23 @@ const ThirdStep = ({setLoading}) => {
         }
       })
   }
+
+  const finalSubmit = e => {
+    if (pathname === '/aggrement') {
+      aggrementSbmt(e)
+    } else {
+      stepThird(e)
+    }
+  }
+
+  // const dogovorobrabotka = () => {   if(pathname === '/aggrement') {     return
+  // `/dogovorobrabotka?token=${token}`   }   if(pathname === '/cabinet/continue')
+  // {     return `/dogovorobrabotka?id=${id}`   }   else {     return
+  // '/dogovorobrabotka'   } }
   return (
 
     <div className='form_register thirdstep'>
-      <form onSubmit={(e) => stepThird(e)}>
+      <form onSubmit={(e) => finalSubmit(e)}>
         <div className='radio_groups'>
           <div
             className='postoplata'
@@ -201,25 +281,28 @@ const ThirdStep = ({setLoading}) => {
         <div className='check_groups'>
           <div data-name='predoplata' className='check-group'>
             <input type='checkbox' checked={docs.doc1}/>
-            <label onClick={(e) => checkDoc(e)} data-name='doc1' className='checklabel'>
-            </label>
-            
-            <a href='/dogovorobrabotka'  target='__blank'>Запрос на обработку персональных данных</a>
+            <label onClick={(e) => checkDoc(e)} data-name='doc1' className='checklabel'></label>
+            {token
+              ? <a href={`/dogovorobrabotka?token=${token}`} target='__blank'>Запрос на обработку персональных данных</a>
+                : <a href={`/dogovorobrabotka`} target='__blank'>Запрос на обработку персональных данных</a>}
+
           </div>
           <div data-name='postoplata' className='check-group'>
             <input type='checkbox' checked={docs.doc2}/>
-            <label onClick={(e) => checkDoc(e)} className='checklabel' data-name='doc2'>
-            </label>
-            
+            <label onClick={(e) => checkDoc(e)} className='checklabel' data-name='doc2'></label>
+
             <a href='/ПУБЛИЧНАЯ ОФЕРТА.pdf' target='__blank'>Договор публичной оферты</a>
           </div>
 
           <div data-name='predoplata' className='check-group'>
             <input type='checkbox' checked={docs.doc4}/>
-            <label onClick={(e) => checkDoc(e)} className='checklabel' data-name='doc4'>
-            </label>
-            
-            <a href={`/dogovor?paymentDate=${paymentDate}&period=${srok}`} target='__blank'>Договор на заказ наряд</a>
+            <label onClick={(e) => checkDoc(e)} className='checklabel' data-name='doc4'></label>
+            {token
+              ? <a
+                  href={`/dogovor?paymentDate=${paymentDate}&period=${srok}&token=${token}`}
+                  target='__blank'>Договор на заказ наряд</a>
+              : <a href={`/dogovor?paymentDate=${paymentDate}&period=${srok}`} target='__blank'>Договор на заказ наряд</a>}
+
           </div>
 
           {Object
@@ -231,10 +314,7 @@ const ThirdStep = ({setLoading}) => {
                 onClick={() => handleFocus()}
                 className='button button_lightest'
                 value='Получить результат'/>
-            : <input
-              type='submit'
-              className='button'
-              value='Получить результат'/>
+            : <input type='submit' className='button' value='Получить результат'/>
 }
         </div>
       </form>

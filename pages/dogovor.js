@@ -11,6 +11,7 @@ const Dogovor = () => {
   const router = useRouter()
   const {paymentDate} = router.query;
   const {period} = router.query;
+  const {token} = router.query;
   const [name,
     setName] = useState('')
   const [type,
@@ -48,12 +49,12 @@ const Dogovor = () => {
     }
   }, [loading])
   useEffect(() => {
-    var lead_id = cookie.get('lead_id')
+    var cookie_token = cookie.get('token')
     
     setLoading(true)
-    if (lead_id) {
+    if (cookie_token !== undefined) {
       axios
-        .post(`${process.env.BASE_URL}/getData?id=${lead_id}`)
+        .post(`${process.env.BASE_URL}/getData?token=${cookie_token}`)
         .then(res => {
           console.log(res)
           setLoading(false)
@@ -66,14 +67,37 @@ const Dogovor = () => {
             setPhone(res.data.phone)
             setCode(res.data.code)
           } else {
-            router.push('/')
+            // router.push('/')
           }
         })
         .catch(err=> {
           setLoading(false)
         })
-    }else {
-      router.push('/')
+    }
+    if(cookie_token === undefined && token) {
+      axios
+      .post(`${process.env.BASE_URL}/getDataSign?token=${token}`)
+      .then(res => {
+        console.log(res)
+        setLoading(false)
+        if (res.data.client_type !== null) {
+          setName(res.data.fio)
+          setCompanyName(res.data.companyName)
+          setIin(res.data.iin)
+          setType(res.data.client_type)
+          setPrice(res.data.amountPayment)
+          setPhone(res.data.phone)
+          setCode(res.data.code)
+        } else {
+          // router.push('/')
+        }
+      })
+      .catch(err=> {
+        setLoading(false)
+      })
+    }
+    else {
+      // router.push('/')
     }
   }, [])
 

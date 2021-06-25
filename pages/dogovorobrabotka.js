@@ -2,7 +2,7 @@ import {useEffect, useState} from "react"
 import Obrabotka from "../components/dogovorPor/ObrabotkaDannih"
 import Head from 'next/head'
 import cookie from 'js-cookie'
-import Router from 'next/router'
+import Router,{useRouter} from 'next/router'
 import axios from "axios"
 import Loader from "../components/loader/Loader"
 const Pdf = () => {
@@ -15,7 +15,11 @@ const Pdf = () => {
   const day = today.getDate()
   const month = today.getMonth() + 1
   const year = today.getFullYear()
-
+  const router = useRouter()
+  const {token} = router.query
+  const {id} = router.query
+  const {leadID} = router.query
+  const finalID = id || leadID
   const parseDay = day < 10
     ? "0" + day
     : day
@@ -24,14 +28,16 @@ const Pdf = () => {
     : "0" + month
 
   const todayParse = parseDay + "." + parseMonth + "." + year;
+
+
+
   useEffect(() => {
-    var lead_id = cookie.get('lead_id')
     if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))  {
       window.print()
     }
     setLoading(true)
-    if(lead_id) {
-      axios.post(`${process.env.BASE_URL}/getData?id=${lead_id}`)
+    if(finalID) {
+      axios.post(`${process.env.BASE_URL}/getData?id=${finalID}`)
         .then((res) => {
           setLoading(false)
           if(res.data.client_type!== null) {
@@ -39,19 +45,51 @@ const Pdf = () => {
             setIin(res.data.iin)
             setCode(res.data.code)
           }else {
-            Router.push('/')
+            // Router.push('/')
           }
         })
         .catch(err=> {
-          Router.push('/')
+          // Router.push('/')
         })
-    }else {
-      Router.push('/')
+    }
+    if(!finalID && !token && cookie.get('token')) {
+      axios.post(`${process.env.BASE_URL}/getData?id=${cookie.get('token')}`)
+      .then((res) => {
+        setLoading(false)
+        if(res.data.client_type!== null) {
+          setName(res.data.fio)
+          setIin(res.data.iin)
+          setCode(res.data.code)
+        }else {
+          // Router.push('/')
+        }
+      })
+      .catch(err=> {
+        Router.push('/')
+      })
+    }
+    if(token) {
+      axios.get(`${process.env.BASE_URL}/getDataSign?token=${token}`)
+      .then((res) => {
+        setLoading(false)
+        if(res.data.client_type!== null) {
+          setName(res.data.fio)
+          setIin(res.data.iin)
+          setCode(res.data.code)
+        }else {
+          // Router.push('/')
+        }
+      })
+      .catch(err=> {
+        Router.push('/')
+      })
+    }
+    else {
+      // Router.push('/')
     }
   }, [])
   return (
     <div className='container'>
-
       <Head>
         <meta name="viewport" content="width=960"/>
       </Head>

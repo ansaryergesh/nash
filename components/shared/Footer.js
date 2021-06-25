@@ -10,6 +10,14 @@ const Footer = () => {
   return (
     <div className={`container ${pathname.includes('dogovor') && 'd-none'}`}>
       <div className='footer'>
+        <div className='footer--info'>
+          <h4>Реквизиты компании</h4>
+          <div className='footer--info__content'>
+            <p>TOO «Nash Company»</p>
+            <p>БИН: 100740009653</p>
+            </div>
+       
+        </div>
         <div className='footer--top'>
           <div className='footer--logo'>
             <AppLink href='/'>

@@ -16,6 +16,7 @@ import {positions} from '../../defaults/positions'
 import cookie from 'js-cookie'
 import {ToastProvider, useToasts} from 'react-toast-notifications'
 import {Formik, Form, Field} from 'formik';
+import {useDispatch } from 'react-redux'
 import {
   emailValid,
   required,
@@ -35,6 +36,7 @@ import IinMask from '../Masks/IinMask'
 
 const FirstStep = ({setLoading}) => {
   const {addToast} = useToasts()
+  const dispatch = useDispatch()
   const [formData,
     setFormData] = useState({
     email: '',
@@ -175,7 +177,7 @@ const FirstStep = ({setLoading}) => {
       source: cookie.get('utm_source') + '_1' || 'nashcompany.kz'
     }
     if (cookie.get('utm_source') !== undefined) {
-      object.utm_source = cookie.get('utm_source')
+      object.utm_source = cookie.get('utm_source') + "_1"
       object.click_id = cookie.get('click_id')
       // object.webID = cookie.get('web_id')
     }
@@ -185,10 +187,17 @@ const FirstStep = ({setLoading}) => {
         setLoading(false)
 
         if (res.data.success) {
-          cookie.set('token', res.data.token)
+          cookie.set('token', res.data.token, {expires: 1000})
           cookie.set('lead_id', res.data.id)
           cookie.set('stepjur', 2)
           Router.push('/jurservice?step=2')
+          dispatch({type: 'AUTHENTICATING_USER'})
+          axios.post(`${process.env.BASE_URL}/getData`, {token: res.data.token})
+            .then(res=> {
+              if(res.data.success) {
+                dispatch({type: 'SET_CURRENT_USER', payload: res.data})
+              }
+            })
         }
         if (!res.data.success) {
           setCodeError(res.data.message)

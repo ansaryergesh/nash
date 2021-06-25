@@ -30,7 +30,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     @media(max-width:769px) {
-      flex-direction: column;
+      // flex-direction: column;
       align-items: center;
       // transform: translateX(14%);
     }
@@ -70,11 +70,11 @@
       -ms-transform: rotate(45deg); /* IE 9 */
       -webkit-transform: rotate(45deg); /* Safari and Chrome */
       position:relative;
-      border: 10px solid;
-      border-image-slice: 1;
-      border-width: 1px;
-      border-image-source: linear-gradient(to left, #67CFF7, #FFF600);
-      margin-bottom: 50px;
+      // border: 10px solid;
+      // border-image-slice: 1;
+      // border-width: 1px;
+      // border-image-source: linear-gradient(to left, #67CFF7, #FFF600);1
+      // margin-bottom: 50px;
       img {
         position: absolute;
         top:92px;
@@ -109,6 +109,13 @@
     }
   }
   .practice_item {
+    span {
+      font-weight: bold;
+      font-size: 32px;
+    }
+    span b {
+      color: #0F9DE7;
+    }
     h2 {
       font-weight: bold;
       font-size: calc(60px + (80 - 60) * ((100vw - 768px) / (1600 - 768)));;
@@ -162,7 +169,7 @@
         flex-direction: column;
       }
     }
-    padding:90px;
+    padding:calc(55px + (85 - 55) * ((100vw - 768px) / (1600 - 768)));
     h2 {
       font-size: calc(55px + (80 - 55) * ((100vw - 768px) / (1600 - 768)));
       line-height: calc(38px + (60 - 38) * ((100vw - 768px) / (1600 - 768)));

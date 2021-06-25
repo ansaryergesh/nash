@@ -15,6 +15,7 @@ class MyDocument extends Document {
               content="«NASH Company» – единственная в Казахстане инновационная ЮРТЕХ компания, которая специализируется в области решения практически любых юридических задач." />
             {/* <meta name="yandex-verification" content="a9d4b76bb5e15aa6" />
             <meta name="yandex-verification" content="a9d4b76bb5e15aa6" /> */}
+            <meta name="yandex-verification" content="bfc13620fcdc0420" />
             <link rel="apple-touch-icon" href="/logo.png" />
             <link rel="shortcut icon" href="/logo.png"/>
 

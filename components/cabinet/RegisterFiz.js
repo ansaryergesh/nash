@@ -152,8 +152,8 @@ const FirstStep = ({setLoading}) => {
         setLoading(false)
 
         if (res.data.success) {
-          cookie.set('token', res.data.token, {expires: 1})
-          cookie.set('lead_id', res.data.id, {expires: 1})
+          cookie.set('token', res.data.token, {expires: 1000})
+          cookie.set('lead_id', res.data.id, {expires: 1000})
           cookie.set('step', 2, {expires: 1})
           Router.push('/dlya-fizicheskix-lic?step=2')
         }

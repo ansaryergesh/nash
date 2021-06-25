@@ -43,7 +43,7 @@ export const handleFocus =() => {
 }
 
 export const getInitials =  (string) => {
-  var names = string.split(' ');
+  var names = string !== null ? string.split(' ') : 'Личный Кабинет';
   
   return names[0] + " " + names[names.length-1].substring(0,1).toUpperCase() + '.';
 };

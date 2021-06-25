@@ -27,7 +27,7 @@ export const loginUser = (values, setError) => dispatch => {
         setError(res.data.message)
         dispatch({type: 'FAILED_LOGIN'})
       }else {
-        cookie.set('token', res.data.token, {expires: 60})
+        cookie.set('token', res.data.token, {expires: 1000})
 
         axios.post(`${process.env.BASE_URL}/getData`, {token: res.data.token})
           .then(res=> {

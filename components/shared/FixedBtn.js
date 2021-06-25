@@ -12,7 +12,7 @@ const FixedBtn = () => {
     pathname.includes('dogovor') || 
     pathname === '/login' ||
     pathname.includes('cabinet') || 
-    pathname === '/register'  ) {
+    pathname === '/register' || pathname=== '/aggrement' )  {
       return false
     }
     else {

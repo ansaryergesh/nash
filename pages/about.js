@@ -33,21 +33,44 @@ const About = () => {
           </div>
           <div className='buttons'>
             <a href='/dlya-fizicheskix-lic'><input type='button' onClick={() => renderForm()} className='button' value='Физические лица'/></a>
-            <a href='getservice'><input type='button' onClick={() => renderForm()} className='button button--light' value='Юридические лица'/></a>
+            <a href='jurservice'><input type='button' onClick={() => renderForm()} className='button button--light' value='Юридические лица'/></a>
           </div>
         </div>
 
       </div>
       <div className='container'>
-        <div className='whyus-block'>
-          <div className='whyus_top'>
-            <h2>Почему
-              <span> мы? </span></h2>
-            <p>МЫ осуществляем взаимодействие со всеми государственными, судебными,
-              административным органами управления.</p>
-          </div>
-
-        </div>
+      <div className='whyus'>
+                
+                <h2>Почему мы?</h2>
+                <div className='why_blocks'>
+                  
+                  <div className='why_block'>
+                    <img src='/img/why/why1.png'></img>
+                    <p>Получи услугу онлайн</p>
+                  </div>
+                  <div className='why_block'>
+                  <img src='/img/why/why2.png'></img>
+                    <p>Полный спектр юридических услуг</p>
+                  </div>
+                  <div className='why_block'>
+                  <img src='/img/why/why3.png'></img>
+                    <p>Постоплата (плати в конце результата)</p>
+                  </div>
+                  <div className='why_block'>
+                  <img src='/img/why/why4.png'></img>
+                    <p>В штате более 10 опытных специалистов</p>
+                  </div>
+                  <div className='why_block'>
+                  <img src='/img/why/why5.png'></img>
+                    <p>У нас дешевле по сравнению с другими компаниями</p>
+                  </div>
+                  <div className='why_block'>
+                  <img src='/img/why/why6.png'></img>
+                    <p>Юристы добиваются результата кратчайшие сроки</p>
+                  </div>
+                </div>
+                
+                </div>
 
         <ul className='advantage_block'>
           <li className='advantage--item'>
@@ -73,10 +96,9 @@ const About = () => {
         <div className='practice'>
           <div className='practice--top'>
           <div className='practice_item'>
-            <h2>
-              Наша
-              <br></br>практика
-            </h2>
+            <span>
+              За <b>10 лет</b> практика
+            </span>
             </div>
             <div className='practice_item'>
               <h1>6083</h1>

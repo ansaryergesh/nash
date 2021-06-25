@@ -6,37 +6,45 @@ import Nav from "../../components/shared/Nav"
 import cookie from 'js-cookie'
 import { filterByParam } from "../../defaults/extraFunction"
 import Loader from '../../components/loader/Loader'
+import withAuth from "../../hocs/withAuth"
 const Requests = () => {
   const [isActive,setActive] = useState(true)
   const [allRequest,setAll] = useState([])
   const [actives,setActives] = useState([])
   const [notFinished,setNotFinished] = useState([])
+  const [deleted,setDeleted] = useState(false)
   const [loading,setLoading] = useState(false)
-  useEffect(() => {
-    setLoading(true)
+  const getUserDeal = () => {
+    console.log('getuserdeal')
     axios.post(`${process.env.BASE_URL}/getUserDataDeal`, {token: cookie.get('token')})
       .then(res=> {
         setLoading(false)
-        console.log(res.data)
         setAll(res.data)
         setActives(filterByParam(res.data, {type: 'deal'}))
         setNotFinished(filterByParam(res.data, {type: 'lead'}))
       })
       .catch(err=> {
         setLoading(false)
-        console.log(err)
       })
+  }
 
+  useEffect(() => {
+    setLoading(true)
+    getUserDeal()
+  },[deleted])
+
+  useEffect(() => {
+    getUserDeal()
   }, [])
 
   return(
     <div className='cabinet'>
       <Nav />
       {loading && <Loader />}
-      <CabinetRequests isActive={isActive} setActive={setActive} actives={actives} notFinished={notFinished}/>
+      <CabinetRequests isActive={isActive} setActive={setActive} actives={actives} notFinished={notFinished} setLoading={setLoading} setDeleted={setDeleted} deleted={deleted}/>
       <CabinetNav />
     </div>
   )
 }
 
-export default Requests
+export default withAuth(Requests)

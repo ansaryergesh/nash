@@ -113,7 +113,7 @@ const Nav = (props) => {
               </li>
 
               <li>
-                <AppLink href='contacts'>Контакты</AppLink>
+                <AppLink href='/contacts'>Контакты</AppLink>
               </li>
               <li>
                 <a href='/ПУБЛИЧНАЯ ОФЕРТА.pdf' target='_blank'>Публичная оферта</a>

@@ -9,7 +9,7 @@ const CabinetProfile = ({user, loggedIn}) => {
         </section>
         <section>
           <span>ФИО:</span>
-          <p className='capitalize'>{user.fio}</p>
+          <p className='capitalize'>{user.fio === null ? 'Удаленный лид' : user.fio}</p>
         </section>
 
         <section>

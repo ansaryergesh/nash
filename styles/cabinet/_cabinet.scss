@@ -83,11 +83,17 @@
       }
       box-shadow: 0px 0px 34px rgba(0, 0, 0, 0.139177);
 
+      h2 {
+        margin: 20px 0;
+        color: rgb(164, 161, 161)!important;
+        text-align: center;
+      }
+
   }
   .request_list {
     display: flex;
     justify-content: space-between;
-    
+  
     flex-wrap: wrap;
     padding: 20px 0;
     @media(max-width:768px) {
@@ -126,4 +132,15 @@
     }
   }
 }
+}
+
+.cancel_btn {
+  border: 2px solid  #ff4136;
+  color:#ff4136;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 15px;
+  padding: 5px;
+  width: 80%;
+  margin: 20px auto;
 }

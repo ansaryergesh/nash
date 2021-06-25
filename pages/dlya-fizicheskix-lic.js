@@ -30,18 +30,6 @@ const GetService = () => {
 
  
   },[])
-
-
-  // useEffect(() => {
-  //   if(cookie.get('step') !== undefined && (cookie.get('lead_id')=== undefined || cookie.get('token') === undefined)){
-  //     console.log('removed')
-  //     cookie.remove('step')
-  //     cookie.remove('lead_id')
-  //     cookie.remove('token')
-  //     router.push('/dlya-fizicheskix-lic')
-  //   }
-  // },[])
-
  
 
   return (
@@ -73,24 +61,11 @@ const GetService = () => {
             <li className={cookieStep === '3' && step==='3' && 'active'}>3 Шаг</li>
           </ul>
         </div>
-        
         {cookie.get('step') === undefined && <FirstStep setLoading={setLoading}/>}
         {cookie.get('step') === '2' && step==='2' && <SecondStep setLoading={setLoading}/>}
-        {cookie.get('step') === '3' && step==='3' && <ThirdStep setLoading={setLoading} />}
-        {/* <SecondStep setLoading={setLoading} /> */}
-        {/* <ThirdStep setLoading={setLoading} /> */}
-        {/* <SecondStep /> */}
-        {/* <ThirdStep /> */}
-        {/* <div className='form_header'>
-          <ul>
-            <li onClick={() => checking()} className={cookieStep === undefined ? 'active' : ''}>1 Шаг</li>
-            <li className={cookieStep === '2' && step==='2' && 'active'}>2 Шаг</li>
-            <li className={cookieStep === '3' && step==='3' && 'active'}>3 Шаг</li>
-          </ul>
-        </div> */}
+        {cookie.get('step') === '3' && step==='3' && <ThirdStep setLoading={setLoading}/>}
       </div>
       </div>
-   
     </div>
   )
 }

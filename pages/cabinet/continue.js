@@ -6,6 +6,7 @@ import SecondStep from '../../components/getservice/SecondStep'
 import ThirdStep from '../../components/getservice/ThirdStep'
 import Loader from '../../components/loader/Loader'
 import Nav from '../../components/shared/Nav'
+import withAuth from '../../hocs/withAuth'
 const Continue = () => {
   const router = useRouter()
   const {id} = router.query
@@ -54,4 +55,4 @@ const Continue = () => {
   )
 }
 
-export default Continue
+export default withAuth(Continue)
