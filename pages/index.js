@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import {useState} from 'react'
 import Feedback from '../components/shared/Feedback'
+import Partner from '../components/partner/Partner'
 import Header from '../components/shared/Header'
 import ModalService from '../components/shared/ModalService'
 import Nav from '../components/shared/Nav'
@@ -26,15 +27,16 @@ export default function Home() {
     : jurservice
   return (
     <div className='home'>
+      <div className='header'>
+        <div className='bg'></div>
+        <Nav/>
+      </div>
       <Head>
         <title>
           Nash Company - Решаемо все!
         </title>
       </Head>
-      <div className='header'>
-        <div className='bg'></div>
-        <Nav/>
-      </div>
+      
       {/* </> */}
       <div className='body'>
         <div className='container'>
@@ -159,7 +161,7 @@ export default function Home() {
                 </div>
                 <div className='why_block'>
                 <img src='/img/why/why6.png'></img>
-                  <p>Юристы добиваются результата кратчайшие сроки</p>
+                  <p>Юристы добиваются результата в кратчайшие сроки</p>
                 </div>
               </div>
               
@@ -182,7 +184,7 @@ export default function Home() {
           <div className='practice--top'>
           <div className='practice_item'>
             <span>
-              За <b>10 лет</b> практика
+              За <b>10 лет</b> практики
             </span>
             </div>
             <div className='practice_item'>
@@ -211,6 +213,8 @@ export default function Home() {
               setId={setId}/>
             <ModalService isModalOpen={modal} closeModal={closeModal} id={id} type={type}/>
           </div>
+          
+          {/* <Partner /> */}
 
         </div>
 

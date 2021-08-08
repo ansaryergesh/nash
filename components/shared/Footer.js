@@ -12,11 +12,41 @@ const Footer = () => {
       <div className='footer'>
         <div className='footer--info'>
           <h4>Реквизиты компании</h4>
+        
           <div className='footer--info__content'>
             <p>TOO «Nash Company»</p>
             <p>БИН: 100740009653</p>
+            <p> Юридический Адрес: Республика Казахстан, </p>
+            <p>г. Алматы, ул. Зенкова 22 офис 107</p>
+            <p>Фактический адрес: г. Алматы, ул. Толе би 101, 3 этаж, блок E</p>
+            <p>Тел: +7 (700) 350 50 00</p>
+            <p>Р/сч KZ728560000004207818</p>
+            <p>В АО «Банк Центр Кредит»</p>
+            <p>БИК KCJBKZKX</p>
             </div>
-       
+            <div className='footer--links'>
+          <ul>
+            <li>
+              <AppLink href='/about'>О компании</AppLink>
+            </li>
+            <li>
+              <AppLink href='/uslugi'>Услуги</AppLink>
+            </li>
+            <li>
+              <AppLink href='/praktika'>Практика</AppLink>
+            </li>
+            <li>
+              <AppLink href='/news'>Пресс центр</AppLink>
+            </li>
+            <li>
+              <AppLink href='/feedback'>Оставить отзыв</AppLink>
+            </li>
+            <li>
+              <AppLink href='/contacts'>Контакт</AppLink>
+            </li>
+          </ul>
+          
+        </div>
         </div>
         <div className='footer--top'>
           <div className='footer--logo'>
@@ -55,7 +85,7 @@ const Footer = () => {
           </div>
           
         </div>
-        <div className='footer--links'>
+        {/* <div className='footer--links'>
           <p>Copyright 2021 © NASH company - все права защищены</p>
           <ul>
             <li>
@@ -77,8 +107,10 @@ const Footer = () => {
               <AppLink href='/contacts'>Контакт</AppLink>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
+      
+      <p className='copyright text-center'>Copyright 2021 © NASH company - все права защищены</p>
     </div>
   )
 }

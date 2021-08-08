@@ -4,19 +4,40 @@ import cookie from 'js-cookie'
 import Router, {useRouter} from 'next/router'
 import swal from 'sweetalert'
 import {amountSpace, handleFocus, parseDate} from "../../defaults/extraFunction"
+import {connect} from "react-redux"
+import CodeModal from '../shared/CodeModal'
 
-const ThirdStep = ({setLoading}) => {
+const mapStateToProps = ({
+  userReducer: {
+    user,
+    loggedIn
+  }
+}) => ({user, loggedIn});
+
+const ThirdStep = ({
+  setLoading, user,loggedIn
+}) => {
   const router = useRouter()
   const {id} = router.query;
   const pathname = router.pathname
   const {token} = router.query
   const {amount} = router.query
-  const [amountVal,setAmount] = useState(0)
+  const [amountVal,
+    setAmount] = useState(0)
   const {leadID} = router.query
-  const [aggrToken, setAggrToken] = useState('')
-  const finalAmount = amount ? amount : amountVal
+  const [aggrToken,
+    setAggrToken] = useState('')
+  const finalAmount = amount
+    ? amount
+    : amountVal
   const [aggrId,
     setAggrId] = useState('')
+  const [phone,
+    setPhone] = useState(null)
+  const [modal,
+    setModal] = useState(false)
+  const [code,
+    setCode] = useState('')
   const finalID = id || leadID
   useEffect(() => {
     const summa = cookie.get('amount') !== undefined
@@ -34,10 +55,8 @@ const ThirdStep = ({setLoading}) => {
     console.log(finalSumma)
   }, [cookie.get('amount')])
 
-
   useEffect(() => {
-    if(token) {
-      console.log(token + 'thisone')
+    if (token) {
       setAggrToken(token)
     }
 
@@ -54,6 +73,7 @@ const ThirdStep = ({setLoading}) => {
             console.log('this')
             router.push('/')
           } else {
+            setPhone(res.data.phone)
             setAggrId(res.data.id)
             setAmount(parseInt(res.data.amount))
           }
@@ -69,6 +89,7 @@ const ThirdStep = ({setLoading}) => {
     setOplata] = useState(false)
   const [paymentDate,
     setPaymentDate] = useState(parseDate(1))
+  const [errorCode,setError] = useState('')
   const [docs,
     setDocs] = useState({"doc1": true, "doc2": true, "doc3": true, "doc4": true})
   const [srok,
@@ -116,8 +137,8 @@ const ThirdStep = ({setLoading}) => {
     }
   }
 
-  const aggrementSbmt = e => {
-    e.preventDefault()
+  const aggrementSbmt = () => {
+    // e.preventDefault()
     setLoading(true)
     axios
       .get(`${process.env.BASE_URL}/removeShortUrl`, {
@@ -143,9 +164,9 @@ const ThirdStep = ({setLoading}) => {
         setLoading(false)
       })
   }
-
-  const stepThird = (e) => {
-    e.preventDefault()
+  
+  const stepThird = () => {
+    // e.preventDefault()
     const object = {
       id: cookie.get('lead_id') === undefined
         ? finalID
@@ -184,22 +205,101 @@ const ThirdStep = ({setLoading}) => {
       })
   }
 
-  const finalSubmit = e => {
+  const finalSubmit = ()=> {
     if (pathname === '/aggrement') {
-      aggrementSbmt(e)
+      aggrementSbmt()
     } else {
-      stepThird(e)
+      stepThird()
+    }
+  }
+
+  const closeModal = () => {
+    setCode('')
+    setError('')
+    setModal(false)
+  }
+
+  const onModal = (param) => {
+    setLoading(true)
+    setModal(false)
+    setError('')
+    axios
+      .get(`${process.env.BASE_URL}/fourthStage?phone=${param}`)
+      .then(res => {
+        setLoading(false)
+        if (res.data.success) {
+          setModal(true)
+        } else {}
+      })
+      .catch(err => {
+        setLoading(false)
+        setModal(false)
+      })
+  }
+
+  const openCodeModal = (e) => {
+    e.preventDefault()
+    console.log(loggedIn)
+    if (cookie.get('token') === undefined && phone === null) {
+      cookie.remove('step')
+      router.push('/')
+    }
+    if (pathname === '/aggrement' && phone) {
+      onModal(phone)
+    }
+    if (pathname !== '/aggrement' && loggedIn) {
+      onModal(user.phone)
+    }
+  }
+  const repeatCode = () => {
+    console.log(loggedIn)
+    if (cookie.get('token') === undefined && phone === null) {
+      cookie.remove('step')
+      router.push('/')
+    }
+    if (pathname === '/aggrement' && phone) {
+      onModal(phone)
+    }
+    if (pathname !== '/aggrement' && loggedIn) {
+      onModal(user.phone)
+    }
+  }
+
+  const checkCode = (param, codeVal) => {
+    setError('')
+    axios
+      .get(`${process.env.BASE_URL}/checkCode?phone=${param}&code=${codeVal}`)
+      .then(res => {
+        console.log(res)
+        if(res.data.success) {
+          setModal(false)
+          finalSubmit()
+        }
+        else {
+          setError(res.data.message)
+        }
+      })
+      .catch(err=> {
+        setError('Что то полшо не так')
+      })
+  }
+
+  const sendCodeCheck = (codeVal) => {
+    if (pathname === '/aggrement' && phone) {
+      checkCode(phone, codeVal)
+    }
+    if (pathname !== '/aggrement' && loggedIn) {
+      checkCode(user.phone, codeVal)
     }
   }
 
   // const dogovorobrabotka = () => {   if(pathname === '/aggrement') {     return
-  // `/dogovorobrabotka?token=${token}`   }   if(pathname === '/cabinet/continue')
-  // {     return `/dogovorobrabotka?id=${id}`   }   else {     return
-  // '/dogovorobrabotka'   } }
+  // `/dogovorobrabotka?token=${token}`   }   if(pathname ===
+  // '/cabinet/continue') {     return `/dogovorobrabotka?id=${id}`   }   else {
+  //   return '/dogovorobrabotka'   } }
   return (
-
     <div className='form_register thirdstep'>
-      <form onSubmit={(e) => finalSubmit(e)}>
+      <form onSubmit={(e) => openCodeModal(e)}>
         <div className='radio_groups'>
           <div
             className='postoplata'
@@ -284,7 +384,7 @@ const ThirdStep = ({setLoading}) => {
             <label onClick={(e) => checkDoc(e)} data-name='doc1' className='checklabel'></label>
             {token
               ? <a href={`/dogovorobrabotka?token=${token}`} target='__blank'>Запрос на обработку персональных данных</a>
-                : <a href={`/dogovorobrabotka`} target='__blank'>Запрос на обработку персональных данных</a>}
+              : <a href={`/dogovorobrabotka`} target='__blank'>Запрос на обработку персональных данных</a>}
 
           </div>
           <div data-name='postoplata' className='check-group'>
@@ -318,8 +418,17 @@ const ThirdStep = ({setLoading}) => {
 }
         </div>
       </form>
+
+      <CodeModal
+        isModalOpen={modal}
+        closeModal={closeModal}
+        code={code}
+        setCode={setCode}
+        onFirstStep={sendCodeCheck}
+        getIdentification={repeatCode}
+        error={errorCode}/>
     </div>
   )
 }
 
-export default ThirdStep
+export default(connect(mapStateToProps, null)(ThirdStep))

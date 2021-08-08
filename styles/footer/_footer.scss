@@ -3,6 +3,9 @@
   border-top: 1px solid #E3E3E3;
 
   &--info {
+    @media(min-width:768px) {
+      text-align: right;
+    }
     h4 {
       font-size: 18px;
       font-weight: bold;
@@ -14,8 +17,8 @@
       flex-direction: column;
     }
     p {
-      line-height: 10px;
-      font-size: 14px;
+      line-height: 9.9px;
+      font-size: 12px;
     }
   }
   &--logo {
@@ -119,13 +122,18 @@
         }
     }
   }
-
+  
   &--links {
       font-size:15px;
       display: flex;
       justify-content: space-between;
-      padding-top: calc(22px + (55 - 22) * ((100vw - 768px) / (1600 - 768))) ;
+      flex-direction: column;
+      @media(min-width:768px) {
+        text-align: right;
+      }
+      // padding-top: calc(22px + (55 - 22) * ((100vw - 768px) / (1600 - 768))) ;
       @media(max-width:768px) {
+        padding-top: 25px;
         flex-direction: column;
       }
       p {
@@ -135,22 +143,23 @@
         } 
       }
       ul {
+        flex-direction: column;
         @media(max-width:768px) {
             order:1;
             display: flex;
             flex-direction: column;
             padding: 0;
-            margin: 0px 0 15px;
+            // margin: 0px 0 15px;
             font-size: 14px;
             
         }
         @media(min-width:769px) {
         li {
-            display: inline-block;
+            // display: inline-block;
           
-            +li {
-               padding-left: 15px; 
-            }
+            // +li {
+            //    padding-left: 15px; 
+            // }
         }}
       }
   }

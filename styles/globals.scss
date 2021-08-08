@@ -20,6 +20,7 @@
 @import 'dogovor/dogovor';
 @import 'cabinet/cabinetnav';
 @import 'cabinet/cabinet';
+@import 'partner/partner';
 $primary-color: black;
 
 html {
@@ -340,4 +341,8 @@ li {
     100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
   }
   
+}
+
+.copyright {
+  font-size: 12px;
 }

@@ -11,6 +11,7 @@ const FixedBtn = () => {
     pathname==='/feedback' || 
     pathname.includes('dogovor') || 
     pathname === '/login' ||
+    pathname === '/reset_password' ||
     pathname.includes('cabinet') || 
     pathname === '/register' || pathname=== '/aggrement' )  {
       return false

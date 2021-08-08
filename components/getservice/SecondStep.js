@@ -105,9 +105,7 @@ const SecondStep = ({setLoading}) => {
   }
 
   useEffect(() => {
-    var form = document.querySelector('.form_register');
-    console.log(form)
-    form.scrollIntoView({block: 'center', behavior: 'smooth'})
+
 
   }, [])
 

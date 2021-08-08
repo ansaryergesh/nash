@@ -8,6 +8,7 @@ const Utm = () => {
   const {utm_medium} = router.query
   const {utm_campaign} = router.query
   const {transaction_id} = router.query
+  const {clickid} = router.query
   const  {token} = router.query
   const {click_code} = router.query
   // const {web_id} = router.query
@@ -33,12 +34,12 @@ const Utm = () => {
   }
   const checkerUtm = checkUtm()
   const checkSource = checkLength()
-  const clickid = v || click_id || transaction_id || click_code || ''
+  const finalclick = v || click_id || clickid || transaction_id || click_code || ''
 
   useEffect(() => {
     console.log(utm_source)
     if(checkerUtm) {
-      cookie.set('click_id', clickid, {expires: 60})
+      cookie.set('click_id', finalclick, {expires: 60})
       cookie.set('utm_source', checkSource, {expires: 60})
       cookie.set('utm_medium', utm_medium,  {expires: 60})
       cookie.set('utm_campaign', utm_campaign || utm_medium, {expires: 60})

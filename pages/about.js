@@ -97,7 +97,7 @@ const About = () => {
           <div className='practice--top'>
           <div className='practice_item'>
             <span>
-              За <b>10 лет</b> практика
+              За <b>10 лет</b> практики
             </span>
             </div>
             <div className='practice_item'>

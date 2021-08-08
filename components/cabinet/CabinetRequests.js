@@ -4,7 +4,6 @@ import swal from 'sweetalert';
 import {ToastProvider, useToasts} from 'react-toast-notifications'
 const Actives = ({actives,setLoading,setDeleted,deleted}) => {
   const {addToast} = useToasts()
-
   const onCancel = (event) => {
     const lead_id = event.currentTarget.dataset.id;
     swal('Отказаться', {
@@ -114,26 +113,6 @@ const CabinetRequests = ({setActive, isActive, actives, notFinished, setLoading,
         {isActive
           ? <ToastProvider><Actives actives={actives} setLoading={setLoading} deleted={deleted} setDeleted={setDeleted}/></ToastProvider>
           : <NotFinished notFinished={notFinished}/>}
-        {/* <div className='request_list'>
-          <div className='request_card'>
-            <p className='status'>В обработке</p>
-            <div className='card_info'>
-              <span className='sphere'>Сфера:Семейные споры</span>
-              <span className='description'>Описание:Lorem lorem lorem lorem lorem</span>
-              <span className='price'>Стоимость услуги: 100000 тг <span>200000тг</span></span>
-              <span className='detailedbtn'>Детали заявки ⮞</span>
-            </div>
-          </div>
-          <div className='request_card'>
-            <p className='status'>В обработке</p>
-            <div className='card_info'>
-              <span className='sphere'>Сфера:Семейные споры</span>
-              <span className='description'>Описание:Lorem lorem lorem lorem lorem</span>
-              <span className='price'>Стоимость услуги: 100000 тг <span>200000тг</span></span>
-              <span className='detailedbtn'>Детали заявки ⮞</span>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   )

@@ -61,7 +61,7 @@ const FirstStep = ({setLoading}) => {
         iin: formData.iin
       }
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       setLoading(false)
     
       if (res.data.success) {
@@ -86,8 +86,8 @@ const FirstStep = ({setLoading}) => {
     })
   }
   const getIdentification = (values) => {
-    console.log(values)
-    console.log('other')
+    // console.log(values)
+    // console.log('other')
     if (!validage(values.iin)) {
       swal("Oops!", `Извините, услуга осуществляется лицам достигшие 18 лет.`, "info");
     } else {
@@ -104,7 +104,7 @@ const FirstStep = ({setLoading}) => {
           iin: values.iin
         }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         setLoading(false)
       
         if (res.data.success) {
@@ -148,12 +148,14 @@ const FirstStep = ({setLoading}) => {
       object.click_id = cookie.get('click_id')
       // object.webID = cookie.get('web_id')
     }
+
+    // console.log(object)
     axios.get(`${process.env.BASE_URL}/stepOne`, {
       params: 
        object
       
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       setLoading(false)
    
       if (res.data.success) {

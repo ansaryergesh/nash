@@ -143,9 +143,10 @@ const Nav = (props) => {
             <AppLink
               className="menu-item"
               href={isActiveUser
-              ? '/cabinet'
+              ? '/cabinet/requests'
               : '/login'}>
-              Личный кабинет
+              {isActiveUser ? 'Мои заявки' : 'Личный кабинет'}
+  
             </AppLink>
 
             <AppLink className="menu-item" href="/news">

@@ -11,6 +11,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import {connect} from 'react-redux'
 import cookie from 'js-cookie'
 import {fetchCurrentUser} from '../store/actions/userAction'
+import Partner from '../components/partner/Partner'
 class MyApp extends App {
   componentDidMount() {
     Router.events.on('routeChangeComplete', () => {
@@ -26,7 +27,6 @@ class MyApp extends App {
     if(cookie.get('token') && !this.props.loggedIn) {
       this.props.fetchCurrentUser()
     }
-
   }
   render() {
     const {Component, pageProps} = this.props;
@@ -34,6 +34,8 @@ class MyApp extends App {
       <Provider store={store}>
         {/* <Nav /> */}
         <Component {...pageProps}/>
+        
+        <Partner />
         <Footer />
         <Utm />
         <FixedBtn />

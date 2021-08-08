@@ -28,7 +28,6 @@ const Login = ({authenticatingUser, failedLogin, loggedIn, loginUser}) => {
   }
 
   useEffect(() => {
-    console.log('login' +loggedIn)
     if (cookie.get('token') && loggedIn) {
       Router.push('/cabinet')
     }
