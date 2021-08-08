@@ -10,6 +10,7 @@ import PriceMask from "../Masks/PriceMask"
 import {handleFocus, replaceDate, thousandSeparator} from "../../defaults/extraFunction"
 import DropFile from "../dropFile/DropFile"
 import DateMask from "../Masks/DateMask"
+import DropFileDoc from "../dropFileDoc/dropFileDoc"
 
 const SecondStep = ({setLoading}) => {
   const router = useRouter()
@@ -113,79 +114,62 @@ const SecondStep = ({setLoading}) => {
     <div className='form_register'>
       <Formik
         initialValues={{
-        id: cookie.get('lead_id') !== undefined
-          ? cookie.get('lead_id')
-          : router.query.id,
-        token: cookie.get('token'),
-        description: '',
-        sphere: '1',
-        amount: ''
-      }}
+          nameCompany: "",
+          description: "",
+          dateAggrement: "",
+          od: "",
+          amount: "",
+          token: cookie.get('token'),
+        }}
         onSubmit=
         {(values) => {stepSecond(values)}}>
         {({errors, touched, values}) => (
           <Form>
-            <Field
-              as='select'
-              onChange={e => onChangeSphere(e)}
-              value={sphere}
-              validate={required}
-              name='sphere'
-              className='form_select'>
-              {finalLists.map((fiz, index) => (
-                <option data-img={`/img/uslugi/${index + 1}.svg`} value={index + 1}>{fiz.name}</option>
-              ))}
-            </Field>
-            {(errors.sphere && touched.sphere)
-              ? <p className='text-danger'>{errors.sphere}</p>
-              : <p className=''></p>}
-
-            {isMfo && <React.Fragment>
               <Field
-                name='amount'
-                type='text'
+                name="nameCompany"
                 validate={required}
-                component={PriceMask}
-                placeholder='Сколько брали'></Field>
-              {(errors.amount && touched.amount)
-                ? <p className='text-danger'>{errors.amount}</p>
-                : <p className=''></p>}</React.Fragment>}
-            
-            {isMfo && <React.Fragment>
+                placeholder="Наименование компании"
+              ></Field>
+              {(errors.nameCompany && touched.nameCompany)
+                ? <p className='text-danger'>{errors.nameCompany}</p>
+                : <p className=''></p>}
               <Field
-                name='date'
+                name="description"
+                type="text"
+                validate={required}
+                placeholder="Описание спора" />
+              {(errors.description && touched.description)
+                ? <p className='text-danger'>{errors.description}</p>
+                : <p className=''></p>}
+              <Field
+                name='dateAggrement'
                 type='text'
                 validate={required}
                 component={DateMask}
-                placeholder='Когда брали (ДД.ММ.ГГГГ)'></Field>
-              {(errors.date && touched.date)
-                ? <p className='text-danger'>{errors.date}</p>
-                : <p className=''></p>}</React.Fragment>}
-
-            {isMfo && <React.Fragment>
-              <Field as='select'><option>Проврка</option></Field>
-              </React.Fragment>}
-            <Field
-              as='textarea'
-              name='description'
-              validate={required}
-              placeholder='Опишите вашу ситуацию'></Field>
-
-            {(errors.description && touched.description)
-              ? <p className='text-danger'>{errors.description}</p>
-              : <p className=''></p>}
-            {!isMfo && <React.Fragment>
+                placeholder='Дата договора (ДД.ММ.ГГГГ)' />              
+                {(errors.dateAggrement && touched.dateAggrement)
+                ? <p className='text-danger'>{errors.dateAggrement}</p>
+                : <p className=''></p>}
+              <Field
+                name="od"
+                type="number"
+                validate={required}
+                placeholder="ОД"/>
+              {(errors.od && touched.od)
+                ? <p className='text-danger'>{errors.od}</p>
+                : <p className=''></p>}
               <Field
                 name='amount'
                 type='text'
                 validate={required}
                 component={PriceMask}
-                placeholder='Сумма иска'></Field>
+                placeholder="Сумма к возврату"/>
               {(errors.amount && touched.amount)
                 ? <p className='text-danger'>{errors.amount}</p>
-                : <p className=''></p>}</React.Fragment>}
-
+                : <p className=''></p>}
             <DropFile setFiles={setFiles}/>
+            <br></br>
+            <DropFileDoc setFiles={setFiles}/>
             <div className='firststep_banner'>
               <div className='firststep_banner--img'>
                 <img alt='image' className='secondstep' src='/img/form/secondstep.png'/>
