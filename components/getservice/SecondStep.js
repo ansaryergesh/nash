@@ -127,6 +127,7 @@ const SecondStep = ({setLoading}) => {
           <Form>
               <Field
                 name="nameCompany"
+                type="text"
                 validate={required}
                 placeholder="Наименование компании"
               ></Field>
@@ -167,7 +168,7 @@ const SecondStep = ({setLoading}) => {
               {(errors.amount && touched.amount)
                 ? <p className='text-danger'>{errors.amount}</p>
                 : <p className=''></p>}
-            <DropFile setFiles={setFiles}/>
+            <DropFile setFiles={setFiles} inputContent="Причина образования долга"/>
             <br></br>
             <DropFileDoc setFiles={setFiles}/>
             <div className='firststep_banner'>

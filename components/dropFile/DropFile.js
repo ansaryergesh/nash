@@ -3,7 +3,7 @@ import Dropzone from "react-dropzone-uploader";
 import axios from "axios";
 import { useEffect } from "react";
 
-const DropFile = ({setFiles}) => {
+const DropFile = ({setFiles, inputContent}) => {
   const getUploadParams = () => {
     return { url: 'https://httpbin.org/post' }
   }
@@ -34,7 +34,7 @@ const DropFile = ({setFiles}) => {
   return (
     <Dropzone
       onChangeStatus={handleChangeStatus}
-      inputContent='Причина образования долга'
+      inputContent={inputContent}
       inputWithFilesContent='Добавить еще'
       maxFiles={5}
       // maxSizeBytes={500000}

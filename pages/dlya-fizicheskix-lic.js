@@ -61,9 +61,12 @@ const GetService = () => {
             <li className={cookieStep === '3' && step==='3' && 'active'}>3 Шаг</li>
           </ul>
         </div>
+        <div className="form_register">
+          
         {cookie.get('step') === undefined && <FirstStep setLoading={setLoading}/>}
         {cookie.get('step') === '2' && step==='2' && <SecondStep setLoading={setLoading}/>}
         {cookie.get('step') === '3' && step==='3' && <ThirdStep setLoading={setLoading}/>}
+        </div>
       </div>
       </div>
     </div>
