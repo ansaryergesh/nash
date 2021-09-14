@@ -8,6 +8,8 @@ import Nav from '../components/shared/Nav'
 import ServiceList from '../components/shared/ServiceList'
 import {fizservice, jurservice} from '../defaults/fizservice'
 import Router from 'next/router'
+import Slider from "react-slick";
+import { sliderWords } from '../defaults/indexSlider'
 export default function Home() {
   const [modal,
     setModal] = useState(false)
@@ -25,6 +27,20 @@ export default function Home() {
   const listofservice = type === 'fiz'
     ? fizservice
     : jurservice
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [{
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1
+        }
+      }]
+    };
+
   return (
     <div className='home'>
       <div className='header'>
@@ -43,42 +59,27 @@ export default function Home() {
           <div className='body__top'>
             <h2 className='text-center'>Решение любых юридических задач</h2>
             <div className='body__blocks'>
-              <div onClick={() => routeUslug()} className='body__block'>
-                <span>Получи услугу
-                  <b> онлайн</b>
-                </span>
-                <p>Получи услугу
-                  <b> онлайн
-                  </b> не обязательно выезжать</p>
-              </div>
-              <div onClick={() => routeUslug()}  className='body__block'>
-                <span>Оплата
-                  <b> после</b>
-                  <span>достижения <b>
-                      результата</b>
-                  </span>
-                </span>
-                <p>Плата в конце сделки, получения результата</p>
-              </div>
-              <div onClick={() => routeUslug()} className='body__block'>
-                <span>Получи
-                  <b> сейчас</b>
-                  <span>
-                    плати потом</span>
-                </span>
-                <p>Сначала услуга потом оплата</p>
-              </div>
+              <Slider {...settings}>
+                {sliderWords.map(s=> (
+                  <div onClick={() => routeUslug()} className='body__block'>
+                    <div>
+                      <span>{s.main}</span>
+                      <p>{s.span}</p>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
 
             </div>
 
             <div className='body__btn'>
-              <p className='text-center' onClick={() => Router.push('/uslugi')}>Получить 50% скидки</p>
+              {/* <p className='text-center' onClick={() => Router.push('/uslugi')}>Получить 50% скидки</p> */}
             </div>
 
             <div className='body__auction text-center'>
-              <span>Акция
-                <b>-50% скидка на все услуги</b>
-              </span>
+              {/* <span>Акция */}
+                {/* <b>-50% скидка на все услуги</b> */}
+              {/* </span> */}
             </div>
 
           </div>
@@ -109,7 +110,7 @@ export default function Home() {
                   </div>
                   <b>Вы оставляете <p className='d-block'>заявку на сайте</p></b>
                 </div>
-                <div className='howwork__list'>
+                {/* <div className='howwork__list'>
                 <div className='circle_block'>
                     <div className='circle'></div>
                   </div>
@@ -126,8 +127,8 @@ export default function Home() {
                     <div className='circle'></div>
                   </div>
                   <b>Участие в суде</b>
-                </div>
-                <div className='howwork__list'>
+                </div> */}
+                <div className='howwork__list'> 
                 <div className='circle_block'>
                     <div className='circle'></div>
                   </div>

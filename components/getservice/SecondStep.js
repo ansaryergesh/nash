@@ -170,7 +170,7 @@ const SecondStep = ({setLoading}) => {
                 : <p className=''></p>}
             <DropFile setFiles={setFiles} inputContent="Причина образования долга"/>
             <br></br>
-            <DropFileDoc setFiles={setFiles}/>
+            <DropFileDoc setFiles={setFiles} inputContent="Информация и Документы о долге (Документ и/или сполнительная надпись и/или Исполнительный лист"/>
             <div className='firststep_banner'>
               <div className='firststep_banner--img'>
                 <img alt='image' className='secondstep' src='/img/form/secondstep.png'/>

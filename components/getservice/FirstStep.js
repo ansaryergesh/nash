@@ -259,27 +259,24 @@ const FirstStep = ({setLoading}) => {
                 ? <p className='text-danger'>{errors.email}</p>
                 : <p className=''></p>}
 
-              <Field
+              {/* <Field
                 type='password'
                 name='password'
                 validate={passwordValid}
                 placeholder='Придумайте пароль'
                 autocomplete='off'/> {(errors.password && touched.password)
                 ? <p className='text-danger'>{errors.password}</p>
-                : <p className=''></p>}
+                : <p className=''></p>} */}
 
               <div className='firststep_banner'>
-                <div className='firststep_banner--img'>
-                  <img alt='image' className='firststep' src='/img/form/firststep.svg'/>
-                </div>
+              
                 <div className='firststep_banner--button'>
                   <input
                     className='singlebtn'
                     type='submit'
                     className='button'
                     onClick={() =>handleFocus()}
-                    value='Хочу скидки'/>
-                  <b>Следующий шаг<br></br> даст 50% скидки</b>
+                    value='Отправить'/>
                 </div>
 
               </div>

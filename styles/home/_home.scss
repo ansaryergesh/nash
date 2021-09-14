@@ -352,6 +352,8 @@
     font-weight: bold;
   }
 
+   
+
   .feedback_block {
     // margin-top: 50px;
     margin:50px auto!important;
@@ -404,3 +406,12 @@
       height: auto!important;       
   }
 }
+
+  /* the slides */
+  .slick-slide {
+    margin: 0 20px!important;
+  }
+  /* the parent */
+  .slick-list {
+    margin: 0 -20px!important;
+  }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7ef6e6d4-b945-46c2-8e52-b35967f6d49b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/out/_next/static/4ST6osehyiBCkImSo_SQu/_buildManifest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/_next/static/4ST6osehyiBCkImSo_SQu/_ssgManifest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/_next/static/chunks/pages/jurservice-b65cfc26a85e8187edac.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/_next/static/chunks/webpack-357802bcda005a686139.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/_next/static/webpack/e57b072d64df3d8c03e6.hot-update.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/_next/static/webpack/f5de0294fe10a8a28d11.hot-update.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/_next/static/webpack/pages/jurservice.e57b072d64df3d8c03e6.hot-update.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/_next/static/webpack/webpack.e57b072d64df3d8c03e6.hot-update.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/_next/static/webpack/webpack.f5de0294fe10a8a28d11.hot-update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/dropFileDoc/dropFileDoc.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/dropFileDoc/dropFileDoc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/getservice/FirstStepJur.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/getservice/FirstStepJur.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/getservice/SecondStep.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/getservice/SecondStep.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/getservice/SecondStepJur.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/getservice/SecondStepJur.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/getservice/ThirdStep.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/getservice/ThirdStep.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/_next/static/chunks/pages/jurservice.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/_next/static/chunks/pages/jurservice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/_next/static/chunks/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/_next/static/chunks/webpack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/_next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/_next/static/development/_buildManifest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/aggrement.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/aggrement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/cabinet.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/cabinet.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/cabinet/continue.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/cabinet/continue.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/cabinet/requests.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/cabinet/requests.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/contacts.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/contacts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/dlya-fizicheskix-lic.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/dlya-fizicheskix-lic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/dogovor.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/dogovor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/dogovorobrabotka.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/dogovorobrabotka.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/dropzone.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/dropzone.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/feedback.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/feedback.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/jurservice.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/jurservice.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/news.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/news.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/praktika.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/praktika.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/reset_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/reset_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/uslugi.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/uslugi.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/dlya-fizicheskix-lic.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dlya-fizicheskix-lic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/jurservice.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/jurservice.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1y72L5MzgcM1t7r3qLlvLVUJe8q" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7ef6e6d4-b945-46c2-8e52-b35967f6d49b" name="Default Changelist" comment="" />
+      <created>1631588248231</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1631588248231</updated>
+      <workItem from="1631588251240" duration="5000" />
+    </task>
+    <servers />
+  </component>
+</project>

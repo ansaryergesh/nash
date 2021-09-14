@@ -124,41 +124,41 @@ const FirstStep = ({setLoading}) => {
       setOrganization({value: 'Пожалуйста введите правильный БИН', type: false})
     }
     if (organization.type === true && organization.value) {
-      console.log(values)
-      setLoading(true)
-      setFormData(values)
-      axios.get(`${process.env.BASE_URL}/identification`, {
-        params: {
-          fio: values.fio,
-          phone: replaceDate(values.phone),
-          email: values.email,
-          password: values.password,
-          type: values.type,
-          iin: binVal,
-          source: 'nashcompany.kz'
-        }
-      }).then(res => {
-        setLoading(false)
+      // console.log(values)
+      // setLoading(true)
+      // setFormData(values)
+      // axios.get(`${process.env.BASE_URL}/identification`, {
+      //   params: {
+      //     fio: values.fio,
+      //     phone: replaceDate(values.phone),
+      //     email: values.email,
+      //     password: values.password,
+      //     type: values.type,
+      //     iin: binVal,
+      //     source: 'nashcompany.kz'
+      //   }
+      // }).then(res => {
+      //   setLoading(false)
 
-        if (res.data.success) {
-          setModal(true)
+      //   if (res.data.success) {
+      //     setModal(true)
 
-        }
-        if (!res.data.success) {
-          addToast(res.data.message, {
-            appearance: 'error',
-            autoDismiss: true
-          })
-        }
-      }).catch(err => {
-        setLoading(false)
-        if (err.response) {
-          addToast(err.response.status, {
-            appearance: 'error',
-            autoDismiss: true
-          })
-        }
-      })
+      //   }
+      //   if (!res.data.success) {
+      //     addToast(res.data.message, {
+      //       appearance: 'error',
+      //       autoDismiss: true
+      //     })
+      //   }
+      // }).catch(err => {
+      //   setLoading(false)
+      //   if (err.response) {
+      //     addToast(err.response.status, {
+      //       appearance: 'error',
+      //       autoDismiss: true
+      //     })
+      //   }
+      // })
     }
 
   }
@@ -212,14 +212,14 @@ const FirstStep = ({setLoading}) => {
   const onSubmit = (e) => {
     e.preventDefault()
     setErrors({
-      ...errors,
-      email: emailValid(formData.email),
-      fio: required(formData.fio),
-      phone: phoneValidation(formData.phone),
-      password: passwordValid(formData.password)
+      // ...errors,
+      // email: emailValid(formData.email),
+      // fio: required(formData.fio),
+      // phone: phoneValidation(formData.phone),
+      // password: passwordValid(formData.password)
     })
 
-    getIdentification()
+    // getIdentification()
   }
 
   const onChange = (e) => {
@@ -260,9 +260,9 @@ const FirstStep = ({setLoading}) => {
                 type='text'
                 disabled
                 className={(organization.type === false && organization.value) && 'disabled_error text-danger'}
-                value={organization.value}
+                value={organization.value}  
                 name='companyName'
-                placeholder='Название Организации'/> {/* <input type='text' className={(organization.type === false && organization.value) && 'disabled_error'} value={organization.value} disabled name='organization' placeholder='Название Организации' /> */}
+                placeholder='Наименование компании'/> {/* <input type='text' className={(organization.type === false && organization.value) && 'disabled_error'} value={organization.value} disabled name='organization' placeholder='Название Организации' /> */}
               <Field
                 as='select'
                 type='text'
@@ -286,7 +286,7 @@ const FirstStep = ({setLoading}) => {
                 ? <p className='text-danger'>{errors.fio}</p>
                 : <p className=''></p>}
 
-              <Field
+              {/* <Field
                 name='phone'
                 className='form-control'
                 placeholder='Телефон номер'
@@ -295,7 +295,7 @@ const FirstStep = ({setLoading}) => {
                 component={PhoneMask}></Field>
               {(errors.phone && touched.phone)
                 ? <p className='text-danger'>{errors.phone}</p>
-                : <p className=''></p>}
+                : <p className=''></p>} */}
 
               <Field
                 type='text'

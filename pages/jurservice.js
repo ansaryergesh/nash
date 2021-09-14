@@ -1,8 +1,8 @@
 import FirstStep from "../components/getservice/FirstStepJur"
-import SecondStep from "../components/getservice/SecondStep"
+import SecondStep from "../components/getservice/SecondStepJur"
 import Nav from "../components/shared/Nav"
 import Head from 'next/head'
-import ThirdStep from "../components/getservice/ThirdStep"
+import ThirdStep from "../components/getservice/ThirdStepJur"
 import {useRouter} from 'next/router'
 import cookie from 'js-cookie'
 import { useEffect, useState } from "react"
@@ -18,15 +18,15 @@ const GetService = () => {
     setCookieStep(cookie.get('stepjur'))
   }, [cookie.get('stepjur')])
   useEffect(() => {
-    if(!cookie.get('stepjur')) {
-      router.push('/jurservice')
-    }
-    if(cookie.get('stepjur') === '2') {
-      router.push('/jurservice?step=2')
-    }
-    if(cookie.get('stepjur') === '3') {
-      router.push('/jurservice?step=3')
-    }
+    // if(!cookie.get('stepjur')) {
+    //   router.push('/jurservice')
+    // }
+    // if(cookie.get('stepjur') === '2') {
+    //   router.push('/jurservice?step=2')
+    // }
+    // if(cookie.get('stepjur') === '3') {
+    //   router.push('/jurservice?step=3')
+    // }
   },[])
 
   // useEffect(() => {
@@ -38,6 +38,16 @@ const GetService = () => {
   //     router.push('/dlya-fizicheskix-lic')
   //   }
   // },[])
+  const headerClick = (num) => {
+    if(num !== "1") {
+
+      cookie.set("stepjur", num);
+      router.push(`/jurservice?step=${num}`)
+    }else {
+      router.push('/jurservice')
+      cookie.remove('stepjur')
+    }
+  }
   return (
     <div className='getservice'>
       {loading && <Loader />}
@@ -62,16 +72,16 @@ const GetService = () => {
         <div className='form_service '>
         <div className='form_header'>
           <ul>
-            <li className={cookieStep === undefined ? 'active' : ''}>1 Шаг</li>
-            <li className={cookieStep === '2' && step==='2' && 'active'}>2 Шаг</li>
-            <li className={cookieStep === '3' && step==='3' && 'active'}>3 Шаг</li>
+            <li onClick={() => headerClick("1")} className={cookieStep === undefined || step===undefined ? 'active' : ''}>1 Шаг</li>
+            <li onClick={()=> headerClick("2")} className={cookieStep === '2' && step==='2' && 'active'}>2 Шаг</li>
+            <li onClick={() => headerClick("3")} className={cookieStep === '3' && step==='3' && 'active'}>3 Шаг</li>
           </ul>
         </div>
-        
+        <div className="form_register">
         {cookie.get('stepjur') === undefined && <FirstStep setLoading={setLoading}/>}
-        {cookie.get('stepjur') === '2' && step==='2' && <SecondStep setLoading={setLoading}/>}
-        {cookie.get('stepjur') === '3' && step==='3' && <ThirdStep setLoading={setLoading}/>}
-        
+        {step==='2' && <SecondStep setLoading={setLoading}/>}
+        {step==='3' && <ThirdStep setLoading={setLoading}/>}
+        </div>
         {/* <SecondStep /> */}
         {/* <ThirdStep /> */}
       </div>
