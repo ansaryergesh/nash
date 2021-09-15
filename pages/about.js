@@ -32,8 +32,8 @@ const About = () => {
 
           </div>
           <div className='buttons'>
-            <a href='/dlya-fizicheskix-lic'><input type='button' onClick={() => renderForm()} className='button' value='Физические лица'/></a>
-            <a href='jurservice'><input type='button' onClick={() => renderForm()} className='button button--light' value='Юридические лица'/></a>
+            <a href='/dlya-fizicheskix-lic'><input type='button' onClick={() => renderForm()} className='button' value='Антиколлектор'/></a>
+            {/* <a href='jurservice'><input type='button' onClick={() => renderForm()} className='button button--light' value='Юридические лица'/></a> */}
           </div>
         </div>
 
@@ -48,14 +48,7 @@ const About = () => {
                     <img src='/img/why/why1.png'></img>
                     <p>Получи услугу онлайн</p>
                   </div>
-                  <div className='why_block'>
-                  <img src='/img/why/why2.png'></img>
-                    <p>Полный спектр юридических услуг</p>
-                  </div>
-                  <div className='why_block'>
-                  <img src='/img/why/why3.png'></img>
-                    <p>Постоплата (плати в конце результата)</p>
-                  </div>
+                 
                   <div className='why_block'>
                   <img src='/img/why/why4.png'></img>
                     <p>В штате более 10 опытных специалистов</p>

@@ -300,94 +300,34 @@ const ThirdStep = ({
   // '/cabinet/continue') {     return `/dogovorobrabotka?id=${id}`   }   else {
   //   return '/dogovorobrabotka'   } }
   return (
-    <div className='form_register thirdstep'>
+    <div className='form_register'>
       <form onSubmit={(e) => openCodeModal(e)}>
-        <input type="password" placeholder="Введите пароль" />
-        {/* <div className='radio_groups'>
-          <div
-            className='postoplata'
-            data-name='postoplata'
-            className='check-group'
-            onClick={e => changeOplata(e)}>
-            <input type='checkbox' checked={predoplata === false}/>
-            <label className='radiolabel'>Постоплата</label>
-          </div>
-
-          <div
-            className='predoplata'
-            data-name='predoplata'
-            className='check-group'
-            onClick={e => changeOplata(e)}>
-            <input type='checkbox' checked={predoplata === true}/>
-
-            <label className='radiolabel'>Предоплата</label>
-          </div>
-        </div> */}
-
-        {/* {!predoplata && <div className="range"> */}
-          {/* <p className='srok_month'>Срок оплаты (месяц)</p>
-          <input
-            className="range__input"
-            type="range"
-            value={srok}
-            onChange={e => changeSrok(e)}
-            min="1"
-            max="3"
-            step="1"
-            list="number"/> */}
-          {/* <datalist className='range__list' id="number">
-            <option
-              onClick={() => changeSrokBtn('1')}
-              className={`range__opt opt0 ${srok === '1' && 'active'}`}>1</option>
-            <option
-              onClick={() => changeSrokBtn('2')}
-              className={`range__opt ${srok === '2' && 'active'}`}>2</option>
-            <option
-              onClick={() => changeSrokBtn('3')}
-              className={`range__opt ${srok === '3' && 'active'}`}>3</option> */}
-            {/* <option
-              onClick={() => changeSrokBtn('4')}
-              className={`range__opt ${srok === '4' && 'active'}`}>4</option>
-            <option
-              onClick={() => changeSrokBtn('5')}
-              className={`range__opt ${srok === '5' && 'active'}`}>5</option>
-            <option
-              onClick={() => changeSrokBtn('6')}
-              className={`range__opt ${srok === '6' && 'active'}`}>6</option> */}
-          {/* </datalist> */}
-        {/* </div> */}
-{/* } */}
-        {/* {!predoplata && <div className='payment_date'>
-          <strong>День оплаты до {paymentDate}
-          </strong>
-        </div>} */}
-
-        {/* <input
-          type='number'
-          className='summa'
-          value={summa}
-          onChange={e => setSumma(e.target.value)}
-          placeholder='Сумма оплаты'/> */}
-        {/* <div className='payment_amount'> */}
-          {/* <p>Сумма оплаты:</p> */}
-          {/* <div> */}
-            {/* <strong>{amountSpace(`${discount}`)}тг</strong> */}
-            {/* <span class="price--line-through">{amountSpace(`${summa}`)}тг</span> */}
-          {/* </div> */}
-          {/* <div className='discount'> */}
-            {/* <img src='/img/discount.png'/> */}
-            {/* <p>-50% */}
-              {/* <span>СКИДКА</span> */}
-            {/* </p> */}
-          {/* </div> */}
-        {/* </div> */}
         <div className='check_groups'>
           <div data-name='predoplata' className='check-group'>
             <input type='checkbox' checked={docs.doc1}/>
             <label onClick={(e) => checkDoc(e)} data-name='doc1' className='checklabel'></label>
             {token
               ? <a href={`/dogovorobrabotka?token=${token}`} target='__blank'>Согласие на сбор и обработку информации</a>
-              : <a href={`/dogovorobrabotka`} target='__blank'>Запрос на обработку персональных данных</a>}
+              : <a href={`/dogovorobrabotka`} target='__blank'>Документ 1</a>}
+              
+
+          </div>
+          <div data-name='predoplata' className='check-group'>
+            <input type='checkbox' checked={docs.doc2}/>
+            <label onClick={(e) => checkDoc(e)} data-name='doc2' className='checklabel'></label>
+            {token
+              ? <a href={`/dogovorobrabotka?token=${token}`} target='__blank'>Согласие на сбор и обработку информации</a>
+              : <a href={`/dogovorobrabotka`} target='__blank'>Документ 2</a>}
+              
+
+          </div>
+          <div data-name='predoplata' className='check-group'>
+            <input type='checkbox' checked={docs.doc3}/>
+            <label onClick={(e) => checkDoc(e)} data-name='doc3' className='checklabel'></label>
+            {token
+              ? <a href={`/dogovorobrabotka?token=${token}`} target='__blank'>Согласие на сбор и обработку информации</a>
+              : <a href={`/dogovorobrabotka`} target='__blank'>Документ 3</a>}
+              
 
           </div>
           {/* <div data-name='postoplata' className='check-group'>
@@ -411,7 +351,6 @@ const ThirdStep = ({
           {docs.doc1 === false
             ? <input
                 type='submit'
-                disabled={true}
                 onClick={() => handleFocus()}
                 className='button button_lightest'
                 value='Получить результат'/>

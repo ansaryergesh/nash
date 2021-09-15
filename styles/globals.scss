@@ -346,3 +346,172 @@ li {
 .copyright {
   font-size: 12px;
 }
+
+
+:root {
+  --ColorOne: #2979ff;
+  --ColorTwo: #b00020;
+  --ColorThree: #00c853;
+}
+
+@media screen and (max-width: 900px) {
+  
+  .main {
+    flex-direction: column;
+  }
+  .main div:first-child {
+    margin-top: 280px;
+    margin-bottom: 0;
+  }
+  .main div:nth-child(2) {
+    margin: -30px 0 20px 0;
+  }
+  .main div h1 {
+    margin: 30px 0;
+  }
+  .main div p {
+    margin-bottom: 10px;
+  }
+  .main div ul li {
+    margin: 15px 0 !important;
+  }
+  .main div a {
+    margin: 30px 0;
+  }
+}
+
+.main {
+  // width: 100vw;
+  height: 50vh;
+  // background-color: ;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow-x: hidden;
+}
+.main div {
+  width: 270px;
+  height: 80%;
+  background-color: rgba(170, 170, 170, 0.143);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.main div:first-child {
+  // margin-bottom: 50px;
+}
+.main div:last-child {
+  // margin-bottom: -50px;
+}
+.main div h1::before {
+  content: "$";
+  margin-right: 5px;
+}
+.main div:first-child h1::before {
+  color: var(--ColorOne);
+}
+.main div:nth-child(2) h1::before {
+  color: var(--ColorTwo);
+}
+.main div:last-child h1::before {
+  color: var(--ColorThree);
+}
+.main div p {
+  width: 100px;
+  padding: 10px;
+  margin-left: -5px;
+  color: #fff;
+  cursor: default;
+  border-radius: 0 10px 10px 0;
+  position: relative;
+  align-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.6s;
+}
+.main div p:hover {
+  width: 80%;
+}
+.main div p::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 0;
+  border-width: 5px 5px 0 0;
+  border-style: solid;
+}
+.main div:first-child p {
+  background-color: var(--ColorOne);
+}
+.main div:first-child p::before {
+  border-color: var(--ColorOne);
+}
+.main div:nth-child(2) p {
+  background-color: var(--ColorTwo);
+}
+.main div:nth-child(2) p::before {
+  border-color: var(--ColorTwo);
+}
+.main div:last-child p {
+  background-color: var(--ColorThree);
+}
+.main div:last-child p::before {
+  border-color: var(--ColorThree);
+}
+.main div ul li {
+  list-style-type: none;
+  text-transform: capitalize;
+  margin: 10px 0;
+  text-align: center;
+  cursor: default;
+}
+.main div ul li:hover {
+  font-weight: bold;
+}
+.main div a {
+  padding: 12px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  position: relative;
+  transition: 0.2s;
+}
+.main div a::before,
+.main div a::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 20%;
+  background-color: inherit;
+  transition: 0.5s ease-in-out;
+}
+.main div a::before {
+  top: -4px;
+  left: 0;
+  transition: 0.2s;
+}
+.main div a::after {
+  bottom: -4px;
+  right: 0;
+  transition: 0.2s;
+}
+.main div:first-child a {
+  background-color: var(--ColorOne);
+}
+.main div:nth-child(2) a {
+  background-color: var(--ColorTwo);
+}
+.main div:last-child a {
+  background-color: var(--ColorThree);
+}
+.main div a:hover {
+  transform: scale(1.05);
+  filter: brightness(90%);
+}
+.main div a:hover::before,
+.main div a:hover::after {
+  width: 100%;
+}

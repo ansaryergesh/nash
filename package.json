@@ -30,6 +30,7 @@
     "react-input-mask": "^2.0.4",
     "react-number-format": "^4.6.0",
     "react-redux": "^7.2.4",
+    "react-select": "^4.3.1",
     "react-slick": "^0.28.1",
     "react-toast-notifications": "^2.4.4",
     "react-transition-group": "^2.9.0",

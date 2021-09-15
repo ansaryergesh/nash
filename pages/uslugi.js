@@ -43,8 +43,8 @@ const Uslugi = () => {
           <h1>Получить
             <br></br>услугу:</h1>
           <div className='content_buttons'>
-          <a href='/dlya-fizicheskix-lic'><input className='button' value='Физические лица' type='button'/></a>
-          <a href='/jurservice'> <input className='button button--light' value='Юридические лица' type='button'/></a>
+          <a href='/dlya-fizicheskix-lic'><input className='button' value='Антиколлектор' type='button'/></a>
+          {/* <a href='/jurservice'> <input className='button button--light' value='Юридические лица' type='button'/></a> */}
           </div>
         </div>
       </div>
